@@ -1,0 +1,157 @@
+import type { StaticImageData } from "next/image";
+
+import alphanodeImage from "@/assets/projects/alphanode.webp";
+import brainrotlangImage from "@/assets/projects/brainrotlang.webp";
+import chatappImage from "@/assets/projects/chatapp.webp";
+import cleetiverseImage from "@/assets/projects/cleetiverse.webp";
+import disthreadImage from "@/assets/projects/disthread.webp";
+import foodhubImage from "@/assets/projects/foodhub.webp";
+import hirespaceImage from "@/assets/projects/hirespace.webp";
+import profitgreenImage from "@/assets/projects/profitgreen.webp";
+import publiusImage from "@/assets/projects/publius.webp";
+import screenlinkImage from "@/assets/projects/screenlink.webp";
+import sprinklImage from "@/assets/projects/sprinkl.webp";
+import syntronImage from "@/assets/projects/syntron.webp";
+
+export type Project = {
+  id: string;
+  name: string;
+  description: string;
+  image: StaticImageData;
+  url: string;
+  /** Demo clip for the grayscale→color hover mechanic; image is used as poster/fallback. */
+  videoSrc?: string;
+  featured?: {
+    order: number;
+    tier: "large" | "medium";
+    /** Proof-point + proof-point + what-it-does. */
+    oneLiner: string;
+  };
+};
+
+export const projects: Project[] = [
+  {
+    id: "profitgreen",
+    name: "ProfitGreen",
+    description:
+      "An investing app with over 6,500 users that provides real-time financial data for thousands of stocks and cryptos, all within Discord.",
+    image: profitgreenImage,
+    url: "https://profitgreen.app",
+    featured: {
+      order: 1,
+      tier: "large",
+      oneLiner: "7K+ users. 1 acquisition offer. Financial data, powered by AI.",
+    },
+  },
+  {
+    id: "alphanode",
+    name: "AlphaNode",
+    description:
+      "A stateful multi-agent equity research engine that uses LangGraph to orchestrate a deterministic parallel architecture, generating institutional-grade financial reports in seconds.",
+    image: alphanodeImage,
+    url: "https://github.com/aLEGEND21/AlphaNode",
+    videoSrc: "/videos/alphanode.mp4",
+    featured: {
+      order: 2,
+      tier: "medium",
+      oneLiner: "Generate institutional-grade equity research reports in seconds.",
+    },
+  },
+  {
+    id: "syntron",
+    name: "Syntron",
+    description:
+      "An agentic shopping search engine that turns natural-language queries into curated product results, powered by a LangGraph pipeline with real-time scraping.",
+    image: syntronImage,
+    url: "https://github.com/aLEGEND21/Syntron",
+    videoSrc: "/videos/syntron.mp4",
+    featured: {
+      order: 3,
+      tier: "medium",
+      oneLiner: "Let your agent shop for you. Curate results, directly from the search bar.",
+    },
+  },
+  {
+    id: "cleetiverse",
+    name: "Cleetiverse",
+    description:
+      "A commissioned project for a Discord bot that allows users to create, catch, breed, and battle custom creatures in a virtual world.",
+    image: cleetiverseImage,
+    url: "https://discord.com/oauth2/authorize?client_id=1038933964968173729&permissions=8&scope=applications.commands%20bot",
+  },
+  {
+    id: "hirespace",
+    name: "HireSpace",
+    description:
+      "A platform for high school students to easily find and apply to internships. Built for the Summer Research & Innovation Program at the North Carolina School of Science and Mathematics.",
+    image: hirespaceImage,
+    url: "https://hirespace.arnavm.com",
+  },
+  {
+    id: "chatapp",
+    name: "Chat App",
+    description:
+      "A real-time chat application with infinite chat rooms allowing users to communicate with anyone, anywhere around the world.",
+    image: chatappImage,
+    url: "https://chat.arnavm.com",
+  },
+  {
+    id: "disthread",
+    name: "Disthread",
+    description:
+      "A social media app used by over 600 users that integrates Threads into Discord, automatically streaming posts from users' favorite Threads accounts into their Discord servers. Achieved rapid growth, reaching 500 users in 1 month.",
+    image: disthreadImage,
+    url: "https://disthread.arnavm.com",
+  },
+  {
+    id: "screenlink",
+    name: "ScreenLink",
+    description:
+      "A modern, zero-install screen sharing platform built with Next.js. Users can share their screens with peers instantly using just a link or code.",
+    image: screenlinkImage,
+    url: "https://github.com/aLEGEND21/screenlink",
+  },
+  {
+    id: "brainrotlang",
+    name: "Brainrot Lang",
+    description:
+      "An online editor for a custom programming language based on brainrot (internet slang).",
+    image: brainrotlangImage,
+    url: "https://brainrot.arnavm.com",
+  },
+  {
+    id: "publius",
+    name: "Publius",
+    description:
+      "An open-source browser-based image rating app. It uses an Elo-rating system to properly rank large numbers of images based on user input, through 1v1 matchups.",
+    image: publiusImage,
+    url: "https://github.com/aLEGEND21/publius",
+  },
+  {
+    id: "sprinkl",
+    name: "Sprinkl",
+    description:
+      "A modern, full-stack web application for discovering, searching, and saving recipes, powered by AI-driven personalized recommendations and Google OAuth authentication.",
+    image: sprinklImage,
+    url: "https://github.com/aLEGEND21/Sprinkl",
+    featured: {
+      order: 4,
+      tier: "medium",
+      oneLiner: "Tinder for recipes. Swipe, save, and cook your way through 9K+ dishes.",
+    },
+  },
+  {
+    id: "foodhub",
+    name: "FoodHub",
+    description:
+      "A modern food tracking application that helps you monitor your daily nutrition intake, track habits, and maintain a healthy lifestyle. Built with Next.js and MongoDB.",
+    image: foodhubImage,
+    url: "https://github.com/aLEGEND21/FoodHub",
+  },
+];
+
+export const featuredProjects = projects
+  .filter((p): p is Project & { featured: NonNullable<Project["featured"]> } =>
+    Boolean(p.featured)
+  )
+  .sort((a, b) => a.featured.order - b.featured.order);

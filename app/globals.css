@@ -1,26 +1,127 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
+  --font-heading: var(--font-elsie);
+  --font-display: var(--font-elsie);
+  --font-body: var(--font-inter);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@theme {
+  /* Lowest-emphasis text (index numbers, faint marks) — spec --color-text-muted */
+  --color-faint: #5a5a5e;
+  --color-accent-hover: #60a5fa;
+
+  --animate-cursor-blink: cursor-blink 1.1s step-end infinite;
+  --animate-cue-bounce: cue-bounce 2s ease-in-out infinite;
+  --animate-blob-drift: blob-drift 14s ease-in-out infinite;
+
+  @keyframes cursor-blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes cue-bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(2px);
+    }
+  }
+
+  @keyframes blob-drift {
+    0%,
+    100% {
+      transform: translate3d(-10%, -8%, 0) scale(1);
+    }
+    50% {
+      transform: translate3d(10%, 8%, 0) scale(1.15);
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/*
+ * Dark-mode-only site. Spec palette mapped onto shadcn's semantic tokens:
+ *   background #0A0A0B · surface → card/popover/muted/secondary/accent #18181B
+ *   border #2A2A2E · text-primary → foreground #F5F5F5
+ *   text-secondary → muted-foreground #9A9A9E · accent → primary/ring #2563EB
+ *   radius-base 12px → --radius (rounded-lg)
+ */
+:root {
+  --background: #0a0a0b;
+  --foreground: #f5f5f5;
+  --card: #18181b;
+  --card-foreground: #f5f5f5;
+  --popover: #18181b;
+  --popover-foreground: #f5f5f5;
+  --primary: #2563eb;
+  --primary-foreground: #f5f5f5;
+  --secondary: #18181b;
+  --secondary-foreground: #f5f5f5;
+  --muted: #18181b;
+  --muted-foreground: #9a9a9e;
+  --accent: #18181b;
+  --accent-foreground: #f5f5f5;
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: #2a2a2e;
+  --input: #2a2a2e;
+  --ring: #2563eb;
+  /* Sharp corners everywhere — luxurious/professional, no rounding. */
+  --radius: 0rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+  a:focus-visible,
+  button:focus-visible,
+  summary:focus-visible {
+    @apply outline-2 outline-offset-2 outline-ring;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
 }
