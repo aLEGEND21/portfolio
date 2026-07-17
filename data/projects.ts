@@ -54,7 +54,7 @@ export const projects: Project[] = [
     featured: {
       order: 2,
       tier: "medium",
-      oneLiner: "Generate institutional-grade equity research reports in seconds.",
+      oneLiner: "Institutional-grade equity research reports, generated in seconds.",
     },
   },
   {
@@ -68,7 +68,7 @@ export const projects: Project[] = [
     featured: {
       order: 3,
       tier: "medium",
-      oneLiner: "Let your agent shop for you. Curate results, directly from the search bar.",
+      oneLiner: "Let your agent shop for you. Get curated results without lifting a finger.",
     },
   },
   {
