@@ -37,7 +37,7 @@ export function ProjectMedia({ image, alt, videoSrc, isActive, sizes }: Props) {
         "relative h-full w-full transition-[filter] duration-[350ms] ease-out",
         isActive
           ? "brightness-100 contrast-100 grayscale-0"
-          : "brightness-90 contrast-[0.85] grayscale"
+          : "brightness-90 contrast-[0.92] grayscale-[0.85]"
       )}
     >
       {videoSrc ? (

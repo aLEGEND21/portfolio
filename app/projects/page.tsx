@@ -39,7 +39,7 @@ export default function ProjectsPage() {
                     alt={`Screenshot of ${project.name}`}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover object-top brightness-90 contrast-[0.85] grayscale transition-[filter] duration-[350ms] ease-out group-hover:brightness-100 group-hover:contrast-100 group-hover:grayscale-0"
+                    className="object-cover object-top brightness-90 contrast-[0.92] grayscale-[0.85] transition-[filter] duration-[350ms] ease-out group-hover:brightness-100 group-hover:contrast-100 group-hover:grayscale-0"
                   />
                 </div>
                 <div className="p-6">

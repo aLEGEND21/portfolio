@@ -52,12 +52,12 @@ export function Hero() {
 
   return (
     <section id="hero" className="relative overflow-x-clip">
-      <div className="relative flex min-h-dvh flex-col items-center justify-center gap-10 pt-6 pb-16 md:flex-row md:gap-0 md:pt-0 md:pb-0">
+      <div className="relative flex min-h-dvh flex-col items-center justify-center gap-10 pt-6 pb-16 max-md:[@media(max-height:700px)]:gap-6 max-md:[@media(max-height:700px)]:pb-10 md:flex-row md:gap-0 md:pt-0 md:pb-0">
         <div
           ref={globeRef}
           className="pointer-events-none absolute inset-y-0 right-[-4%] hidden w-[55%] items-center justify-end will-change-transform md:flex lg:right-[4%]"
         >
-          {hydrated && isDesktop && <Globe className="max-w-[640px]" />}
+          {hydrated && isDesktop && <Globe className="max-w-[min(640px,80vh)]" />}
         </div>
         <div
           ref={textRef}
@@ -66,13 +66,13 @@ export function Hero() {
           <p className="font-mono text-[13px] font-medium uppercase tracking-[0.06em] text-muted-foreground">
             Software Engineer — Cary, NC
           </p>
-          <h1 className="mt-4 font-display text-[44px] leading-[1.1] md:text-[80px]">
+          <h1 className="mt-4 font-display text-[44px] leading-[1.1] max-md:[@media(max-height:700px)]:mt-3 max-md:[@media(max-height:700px)]:text-[36px] md:text-[80px]">
             Arnav Murthi
           </h1>
           <p className="mt-5 font-mono text-base leading-[1.4] md:text-xl">
             <Typewriter />
           </p>
-          <p className="mx-auto mt-6 max-w-[480px] px-4 text-base leading-[1.6] text-muted-foreground md:mx-0 md:px-0 md:text-lg">
+          <p className="mx-auto mt-6 max-w-[480px] px-4 text-base leading-[1.6] text-muted-foreground max-md:[@media(max-height:700px)]:mt-4 md:mx-0 md:px-0 md:text-lg">
             I build products end-to-end, taking them from idea to thousands of
             users.
           </p>
@@ -83,7 +83,9 @@ export function Hero() {
           ref={mobileGlobeRef}
           className="flex w-full justify-center px-10 md:hidden"
         >
-          {hydrated && !isDesktop && <Globe className="max-w-[280px]" />}
+          {hydrated && !isDesktop && (
+            <Globe className="max-w-[280px] [@media(max-height:700px)]:max-w-[210px]" />
+          )}
         </div>
 
         <div
