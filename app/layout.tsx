@@ -27,11 +27,11 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://arnavm.com"),
   title: "Arnav Murthi — Full-Stack Developer",
   description:
-    "Full-stack developer, founder, and freelance developer based in Cary, NC. Builder of ProfitGreen, Disthread, HireSpace, and more.",
+    "Full-stack developer, founder, and freelance developer based in Chapel Hill, NC. Builder of ProfitGreen, Disthread, HireSpace, and more.",
   openGraph: {
     title: "Arnav Murthi — Full-Stack Developer",
     description:
-      "Full-stack developer, founder, and freelance developer based in Cary, NC.",
+      "Full-stack developer, founder, and freelance developer based in Chapel Hill, NC.",
     url: "https://arnavm.com",
     siteName: "Arnav Murthi",
     type: "website",

@@ -64,7 +64,7 @@ export function Hero() {
           className="relative z-10 mx-auto w-full max-w-[1400px] px-6 text-center will-change-transform md:px-12 md:text-left"
         >
           <p className="font-mono text-[13px] font-medium uppercase tracking-[0.06em] text-muted-foreground">
-            Software Engineer — Cary, NC
+            Software Engineer — Chapel Hill, NC
           </p>
           <h1 className="mt-4 font-display text-[44px] leading-[1.1] max-md:[@media(max-height:700px)]:mt-3 max-md:[@media(max-height:700px)]:text-[36px] md:text-[80px]">
             Arnav Murthi
