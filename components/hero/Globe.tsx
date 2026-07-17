@@ -127,8 +127,8 @@ export function Globe({ className }: { className?: string }) {
         className="pointer-events-none absolute left-0 top-0 opacity-0 will-change-transform"
       >
         <svg
-          width="31"
-          height="31"
+          width="34"
+          height="34"
           viewBox="0 0 24 24"
           fill="#2563eb"
           stroke="#0a0a0b"
