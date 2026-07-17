@@ -115,7 +115,7 @@ export function ProjectBlock({
               sizes="(max-width: 768px) 100vw, 66vw"
             />
           </div>
-          <div className="flex items-center border-t border-border px-6 py-10 transition-colors duration-300 group-hover:bg-white/[0.04] md:border-l md:border-t-0 md:px-12">
+          <div className="flex items-center border-t border-border px-6 py-10 transition-colors duration-300 group-hover:bg-white/[0.02] md:border-l md:border-t-0 md:px-12">
             {text}
           </div>
         </div>
@@ -136,7 +136,7 @@ export function ProjectBlock({
               sizes="(max-width: 768px) 100vw, 50vw"
             />
           </div>
-          <div className="flex-1 border-t border-border px-6 py-8 transition-colors duration-300 group-hover:bg-white/[0.04] md:px-10 md:py-10">
+          <div className="flex-1 border-t border-border px-6 py-8 transition-colors duration-300 group-hover:bg-white/[0.02] md:px-10 md:py-10">
             {text}
           </div>
         </div>
