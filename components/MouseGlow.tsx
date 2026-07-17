@@ -23,7 +23,7 @@ export function MouseGlow() {
         rafId = 0;
         const el = ref.current;
         if (!el) return;
-        el.style.background = `radial-gradient(110px circle at ${x}px ${y}px, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.03) 40%, transparent 75%)`;
+        el.style.background = `radial-gradient(165px circle at ${x}px ${y}px, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.03) 40%, transparent 75%)`;
         el.style.opacity = "1";
       });
     };
