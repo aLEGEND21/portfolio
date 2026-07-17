@@ -16,6 +16,7 @@ CURRENT="$(cat "$STATE_DIR/current" 2>/dev/null || true)"
 start_container() {
   docker rm -f "$IMAGE" > /dev/null 2>&1 || true
   docker run -d --name "$IMAGE" --restart unless-stopped \
+    --network nginx-proxy \
     -p "$PORT:3000" "$IMAGE:$1" > /dev/null
 }
 

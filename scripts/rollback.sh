@@ -18,6 +18,7 @@ CURRENT="$(cat "$STATE_DIR/current" 2>/dev/null || true)"
 echo "Rolling back to $IMAGE:$PREVIOUS"
 docker rm -f "$IMAGE" > /dev/null 2>&1 || true
 docker run -d --name "$IMAGE" --restart unless-stopped \
+  --network nginx-proxy \
   -p "$PORT:3000" "$IMAGE:$PREVIOUS" > /dev/null
 
 # The rolled-back release is now current; keep the old one for rolling forward.
