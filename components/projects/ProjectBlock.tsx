@@ -52,8 +52,12 @@ export function ProjectBlock({
     threshold: 0.15,
     once: true,
   });
+  // The bottom margin keeps touch activation (color + playback) from firing
+  // while the media is still entering at the bottom edge; it has to climb
+  // clear of the lower band of the viewport before it lights up.
   const [mediaViewRef, mediaInView] = useInView<HTMLDivElement>({
     threshold: 0.6,
+    rootMargin: "0% 0% -30% 0%",
   });
 
   // Touch devices activate by visibility instead of hover.
