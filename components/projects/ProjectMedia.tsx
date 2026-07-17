@@ -1,8 +1,9 @@
 "use client";
 
 import Image, { type StaticImageData } from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
+import { Skeleton } from "@/components/ui/skeleton";
 import { usePrefersReducedMotion } from "@/lib/hooks/useMediaQuery";
 import { cn } from "@/lib/utils";
 
@@ -20,6 +21,7 @@ type Props = {
 export function ProjectMedia({ image, alt, videoSrc, isActive, sizes }: Props) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const reducedMotion = usePrefersReducedMotion();
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -30,6 +32,23 @@ export function ProjectMedia({ image, alt, videoSrc, isActive, sizes }: Props) {
       video.pause();
     }
   }, [isActive, reducedMotion]);
+
+  // A video's poster fires no load event, so preload it as a plain image to
+  // know when the skeleton can go.
+  useEffect(() => {
+    if (!videoSrc) return;
+    const poster = new window.Image();
+    poster.onload = () => setLoaded(true);
+    poster.src = image.src;
+    return () => {
+      poster.onload = null;
+    };
+  }, [videoSrc, image.src]);
+
+  const mediaClassName = cn(
+    "absolute inset-0 size-full object-cover object-center transition-opacity duration-500",
+    loaded ? "opacity-100" : "opacity-0"
+  );
 
   return (
     <div
@@ -44,6 +63,7 @@ export function ProjectMedia({ image, alt, videoSrc, isActive, sizes }: Props) {
           : "brightness-90 contrast-[0.92] grayscale-[0.85]"
       )}
     >
+      {!loaded && <Skeleton className="absolute inset-0" />}
       {videoSrc ? (
         <video
           ref={videoRef}
@@ -53,7 +73,7 @@ export function ProjectMedia({ image, alt, videoSrc, isActive, sizes }: Props) {
           loop
           playsInline
           preload="metadata"
-          className="absolute inset-0 size-full object-cover object-center"
+          className={mediaClassName}
         />
       ) : (
         <Image
@@ -61,7 +81,8 @@ export function ProjectMedia({ image, alt, videoSrc, isActive, sizes }: Props) {
           alt={alt}
           fill
           sizes={sizes}
-          className="object-cover object-center"
+          onLoad={() => setLoaded(true)}
+          className={mediaClassName}
         />
       )}
     </div>

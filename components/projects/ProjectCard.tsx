@@ -1,8 +1,10 @@
 "use client";
 
 import Image from "next/image";
+import { useState } from "react";
 
 import { Card } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 import type { Project } from "@/data/projects";
 import { useInView } from "@/lib/hooks/useInView";
 import { useMediaQuery } from "@/lib/hooks/useMediaQuery";
@@ -18,6 +20,7 @@ export function ProjectCard({ project }: { project: Project }) {
     rootMargin: "0% 0% -30% 0%",
   });
   const isActive = isTouch && mediaInView;
+  const [loaded, setLoaded] = useState(false);
 
   return (
     <a
@@ -31,13 +34,16 @@ export function ProjectCard({ project }: { project: Project }) {
           ref={mediaViewRef}
           className="relative aspect-[16/10] overflow-hidden border-b border-border"
         >
+          {!loaded && <Skeleton className="absolute inset-0" />}
           <Image
             src={project.image}
             alt={`Screenshot of ${project.name}`}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            onLoad={() => setLoaded(true)}
             className={cn(
-              "object-cover object-top transition-[filter] duration-[800ms] ease-out",
+              "object-cover object-top transition-[filter,opacity] duration-[800ms] ease-out",
+              loaded ? "opacity-100" : "opacity-0",
               isActive
                 ? "brightness-100 contrast-100 grayscale-0"
                 : "brightness-90 contrast-[0.92] grayscale-[0.85] group-hover:brightness-100 group-hover:contrast-100 group-hover:grayscale-0"
