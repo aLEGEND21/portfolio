@@ -38,7 +38,7 @@ export function ProjectMedia({ image, alt, videoSrc, isActive, sizes }: Props) {
       // indefinite, letting the video blow up to its intrinsic size.
       // overflow-hidden guarantees nothing escapes the media cell regardless.
       className={cn(
-        "absolute inset-0 overflow-hidden transition-[filter] duration-[350ms] ease-out",
+        "absolute inset-0 overflow-hidden transition-[filter] duration-[800ms] ease-out",
         isActive
           ? "brightness-100 contrast-100 grayscale-0"
           : "brightness-90 contrast-[0.92] grayscale-[0.85]"
