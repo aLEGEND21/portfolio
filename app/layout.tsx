@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Elsie, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
+import { MouseGlow } from "@/components/MouseGlow";
+
 const elsie = Elsie({
   variable: "--font-elsie",
   subsets: ["latin"],
@@ -46,7 +48,10 @@ export default function RootLayout({
       lang="en"
       className={`${elsie.variable} ${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <MouseGlow />
+        {children}
+      </body>
     </html>
   );
 }
