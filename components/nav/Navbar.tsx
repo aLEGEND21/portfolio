@@ -50,11 +50,15 @@ export function Navbar() {
         )}
       >
         <div className="mx-auto flex h-16 w-full max-w-[1400px] items-center justify-between px-6 md:px-12">
-          <Link href="/" className="flex items-center gap-3">
-            <span className="flex size-7 items-center justify-center border border-foreground bg-primary font-display text-[13px] text-primary-foreground">
-              AM
-            </span>
-            <span className="font-display text-lg">Arnav Murthi</span>
+          <Link
+            href="/"
+            className="group relative font-mono text-[13px] font-medium uppercase tracking-[0.06em]"
+          >
+            Arnav Murthi
+            <span
+              aria-hidden
+              className="absolute inset-x-0 -bottom-1 h-px origin-left scale-x-0 bg-current transition-transform duration-300 ease-out group-hover:scale-x-100"
+            />
           </Link>
         </div>
       </nav>
