@@ -1,3 +1,7 @@
+"use client";
+
+import { useRef } from "react";
+
 import { ActiveMediaProvider } from "@/components/projects/ActiveMediaContext";
 import {
   ProjectBlock,
@@ -5,6 +9,11 @@ import {
 } from "@/components/projects/ProjectBlock";
 import { SeeAllTile } from "@/components/projects/SeeAllTile";
 import { featuredProjects } from "@/data/projects";
+import {
+  useMediaQuery,
+  usePrefersReducedMotion,
+} from "@/lib/hooks/useMediaQuery";
+import { useScrollY } from "@/lib/hooks/useScrollY";
 
 function blockProps(
   slot: number,
@@ -27,8 +36,37 @@ function blockProps(
 // side text), two half-width projects, then the fourth project sharing a row
 // with the "all projects" cell. No gaps — light borders separate everything.
 export function FeaturedProjects() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const reducedMotion = usePrefersReducedMotion();
+
+  // On mobile the section catches up to the departing hero: it rises slightly
+  // faster than the scroll until it reaches the top of the frame, where the
+  // offset decays to zero and scrolling feels normal again.
+  useScrollY((y) => {
+    const el = sectionRef.current;
+    if (!el) return;
+    if (isDesktop || reducedMotion) {
+      el.style.transform = "";
+      return;
+    }
+    // +64 = the section's mobile pt-16, so the boost lasts until the
+    // "Project Highlights" header itself reaches the top of the frame.
+    const headerTop = el.offsetTop + 64;
+    const progress = Math.min(
+      1,
+      Math.max(0, (headerTop - y) / window.innerHeight)
+    );
+    el.style.transform =
+      progress > 0 ? `translateY(${-0.35 * y * progress}px)` : "";
+  });
+
   return (
-    <section id="projects" className="scroll-mt-0 pt-16 md:scroll-mt-16 md:pt-32">
+    <section
+      ref={sectionRef}
+      id="projects"
+      className="scroll-mt-0 pt-16 will-change-transform md:scroll-mt-16 md:pt-32"
+    >
       <div className="mx-auto mb-10 w-full max-w-[1400px] px-6 md:mb-14 md:px-12">
         <h2 className="text-center font-mono text-[13px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
           Project Highlights

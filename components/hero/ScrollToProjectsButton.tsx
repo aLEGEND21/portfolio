@@ -35,7 +35,7 @@ export function ScrollToProjectsButton() {
           })
         }
       >
-        Projects
+        Highlights
         <ArrowDown className="size-4 animate-cue-bounce motion-reduce:animate-none" />
       </button>
     </div>

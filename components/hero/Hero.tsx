@@ -39,11 +39,13 @@ export function Hero() {
       globe.style.transform = `translateY(${y * -0.35}px)`;
       globe.style.opacity = opacity;
     }
-    // On mobile the globe outpaces the text and fades as it slides behind it.
+    // On mobile the globe lags the scroll — still rising on screen, just
+    // slower — and fades out fully right as the projects header (~1vh + its
+    // padding into the page) is about to reach the top and overlap it.
     if (mobileGlobe) {
-      mobileGlobe.style.transform = `translateY(${y * -0.35}px)`;
+      mobileGlobe.style.transform = `translateY(${y * 0.25}px)`;
       mobileGlobe.style.opacity = String(
-        Math.max(0, 1 - y / (window.innerHeight * 0.35))
+        Math.max(0, 1 - y / window.innerHeight)
       );
     }
   });
@@ -70,8 +72,8 @@ export function Hero() {
           <p className="mt-5 font-mono text-base leading-[1.4] md:text-xl">
             <Typewriter />
           </p>
-          <p className="mx-auto mt-6 max-w-[480px] text-base leading-[1.6] text-muted-foreground md:mx-0 md:text-lg">
-            Building products end-to-end, scaling from ideas to thousands of
+          <p className="mx-auto mt-6 max-w-[480px] px-4 text-base leading-[1.6] text-muted-foreground md:mx-0 md:px-0 md:text-lg">
+            I build products end-to-end, taking them from idea to thousands of
             users.
           </p>
         </div>

@@ -52,7 +52,7 @@ export function Typewriter() {
         </span>
         <span
           className={
-            "ml-1 inline-block h-[1.1em] w-[2px] translate-y-[0.2em] bg-primary " +
+            "ml-1 inline-block h-[1.1em] w-[0.55em] translate-y-[0.2em] bg-primary " +
             (reducedMotion ? "" : "animate-cursor-blink")
           }
         />
