@@ -33,8 +33,12 @@ export function ProjectMedia({ image, alt, videoSrc, isActive, sizes }: Props) {
 
   return (
     <div
+      // Absolute + inset instead of h-full/w-full: iOS Safari resolves a
+      // percentage height against the parent's aspect-ratio-derived height as
+      // indefinite, letting the video blow up to its intrinsic size.
+      // overflow-hidden guarantees nothing escapes the media cell regardless.
       className={cn(
-        "relative h-full w-full transition-[filter] duration-[350ms] ease-out",
+        "absolute inset-0 overflow-hidden transition-[filter] duration-[350ms] ease-out",
         isActive
           ? "brightness-100 contrast-100 grayscale-0"
           : "brightness-90 contrast-[0.92] grayscale-[0.85]"
