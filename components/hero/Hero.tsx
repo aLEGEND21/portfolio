@@ -73,8 +73,7 @@ export function Hero() {
             <Typewriter />
           </p>
           <p className="mx-auto mt-6 max-w-[480px] px-4 text-base leading-[1.6] text-muted-foreground max-md:[@media(max-height:700px)]:mt-4 md:mx-0 md:px-0 md:text-lg">
-            I build products end-to-end, taking them from idea to thousands of
-            users.
+            Shipping products from first commit to thousands of users.
           </p>
         </div>
 
