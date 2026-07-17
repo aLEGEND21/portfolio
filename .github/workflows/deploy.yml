@@ -18,8 +18,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Compute image tag
+        run: echo "TAG=${GITHUB_SHA::7}" >> "$GITHUB_ENV"
+
       - name: Build image
-        run: docker build -t "$IMAGE:${{ github.sha }}" .
+        run: docker build -t "$IMAGE:$TAG" .
 
       - name: Set up SSH
         run: |
@@ -35,10 +38,10 @@ jobs:
           } > ~/.ssh/config
 
       - name: Ship image to VPS
-        run: docker save "$IMAGE:${{ github.sha }}" | gzip | ssh vps 'gunzip | docker load'
+        run: docker save "$IMAGE:$TAG" | gzip | ssh vps 'gunzip | docker load'
 
       - name: Deploy
         run: |
           ssh vps 'mkdir -p /opt/portfolio'
           scp scripts/deploy.sh scripts/rollback.sh vps:/opt/portfolio/
-          ssh vps "bash /opt/portfolio/deploy.sh ${{ github.sha }}"
+          ssh vps "bash /opt/portfolio/deploy.sh $TAG"
