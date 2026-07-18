@@ -60,6 +60,16 @@ export function Navbar() {
               className="absolute inset-x-0 -bottom-1 h-px origin-left scale-x-0 bg-current transition-transform duration-300 ease-out group-hover:scale-x-100"
             />
           </Link>
+          <Link
+            href="/projects"
+            className="group relative font-mono text-[13px] font-medium uppercase tracking-[0.06em] text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Projects
+            <span
+              aria-hidden
+              className="absolute inset-x-0 -bottom-1 h-px origin-left scale-x-0 bg-current transition-transform duration-300 ease-out group-hover:scale-x-100"
+            />
+          </Link>
         </div>
       </nav>
     </header>
