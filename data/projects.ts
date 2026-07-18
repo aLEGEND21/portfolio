@@ -3,7 +3,7 @@ import type { StaticImageData } from "next/image";
 import alphanodeImage from "@/assets/projects/alphanode.webp";
 import brainrotlangImage from "@/assets/projects/brainrotlang.webp";
 import chatappImage from "@/assets/projects/chatapp.webp";
-import cleetiverseImage from "@/assets/projects/cleetiverse.webp";
+// import cleetiverseImage from "@/assets/projects/cleetiverse.webp";
 import disthreadImage from "@/assets/projects/disthread.webp";
 import foodhubImage from "@/assets/projects/foodhub.webp";
 import hirespaceImage from "@/assets/projects/hirespace.webp";
@@ -12,6 +12,7 @@ import publiusImage from "@/assets/projects/publius.webp";
 import screenlinkImage from "@/assets/projects/screenlink.webp";
 import sprinklImage from "@/assets/projects/sprinkl.webp";
 import syntronImage from "@/assets/projects/syntron.webp";
+import uncrankdImage from "@/assets/projects/uncrankd.webp";
 
 export type Project = {
   id: string;
@@ -95,6 +96,15 @@ export const projects: Project[] = [
     },
   },
   {
+    id: "uncrankd",
+    tags: ["AI", "WEB", "SOCIAL"],
+    name: "UNCRankd",
+    description:
+      "An Elo-style system that ranks UNC students' and alumni's LinkedIn profiles through LLM-judged matchups, using a local Llama model to compress profiles and the Nvidia NIM API to decide the rankings.",
+    image: uncrankdImage,
+    url: "https://github.com/aLEGEND21/UNCRankd",
+  },
+  {
     id: "screenlink",
     tags: ["WEB"],
     name: "ScreenLink",
@@ -130,15 +140,16 @@ export const projects: Project[] = [
     image: publiusImage,
     url: "https://github.com/aLEGEND21/publius",
   },
-  {
-    id: "cleetiverse",
-    tags: ["APP", "SOCIAL"],
-    name: "Cleetiverse",
-    description:
-      "A commissioned project for a Discord bot that allows users to create, catch, breed, and battle custom creatures in a virtual world.",
-    image: cleetiverseImage,
-    url: "https://discord.com/oauth2/authorize?client_id=1038933964968173729&permissions=8&scope=applications.commands%20bot",
-  },
+  // Parked to keep the grid at 12 projects — restore alongside its import.
+  // {
+  //   id: "cleetiverse",
+  //   tags: ["APP", "SOCIAL"],
+  //   name: "Cleetiverse",
+  //   description:
+  //     "A commissioned project for a Discord bot that allows users to create, catch, breed, and battle custom creatures in a virtual world.",
+  //   image: cleetiverseImage,
+  //   url: "https://discord.com/oauth2/authorize?client_id=1038933964968173729&permissions=8&scope=applications.commands%20bot",
+  // },
   {
     id: "hirespace",
     tags: ["WEB", "SOCIAL"],
