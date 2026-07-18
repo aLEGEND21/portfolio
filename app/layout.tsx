@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Elsie, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -23,8 +23,12 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+// Absolute URLs (og:image thumbnail, og:url) resolve against this — switch
+// to https://arnavm.com when the site moves off the new. subdomain.
+const SITE_URL = "https://new.arnavm.com";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://arnavm.com"),
+  metadataBase: new URL(SITE_URL),
   title: "Arnav Murthi — Full-Stack Developer",
   description:
     "Full-stack developer, founder, and freelance developer based in Chapel Hill, NC. Builder of ProfitGreen, Disthread, HireSpace, and more.",
@@ -32,10 +36,17 @@ export const metadata: Metadata = {
     title: "Arnav Murthi — Full-Stack Developer",
     description:
       "Full-stack developer, founder, and freelance developer based in Chapel Hill, NC.",
-    url: "https://arnavm.com",
+    url: "/",
     siteName: "Arnav Murthi",
     type: "website",
+    // Square icon so link embeds (Discord etc.) show a compact thumbnail.
+    images: [{ url: "/icon.png", width: 512, height: 512 }],
   },
+};
+
+export const viewport: Viewport = {
+  // Accent used by link embeds (Discord's sidebar color) and mobile chrome.
+  themeColor: "#2563eb",
 };
 
 export default function RootLayout({
