@@ -42,6 +42,11 @@ export const metadata: Metadata = {
     // Square icon so link embeds (Discord etc.) show a compact thumbnail.
     images: [{ url: "/icon.png", width: 512, height: 512 }],
   },
+  // "summary" (not summary_large_image) keeps Discord's thumbnail small and
+  // on the right instead of full-width at the bottom.
+  twitter: {
+    card: "summary",
+  },
 };
 
 export const viewport: Viewport = {
