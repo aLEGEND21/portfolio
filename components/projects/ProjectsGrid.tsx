@@ -6,7 +6,7 @@ import { ProjectCard } from "@/components/projects/ProjectCard";
 import { projects } from "@/data/projects";
 import { cn } from "@/lib/utils";
 
-const FILTERS = ["ALL", "WEB", "AI", "BOTS"] as const;
+const FILTERS = ["ALL", "AI", "APP", "WEB"] as const;
 type Filter = (typeof FILTERS)[number];
 
 // Filterable card grid for the all-projects page. The filter bar is plain

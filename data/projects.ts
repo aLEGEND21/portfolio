@@ -19,7 +19,7 @@ export type Project = {
   description: string;
   image: StaticImageData;
   url: string;
-  /** First tag should be one of the grid filter categories (WEB / AI / BOTS). */
+  /** First tag should be one of the grid filter categories (WEB / AI / APP). */
   tags: string[];
   /** Demo clip for the grayscale→color hover mechanic; image is used as poster/fallback. */
   videoSrc?: string;
@@ -34,7 +34,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     id: "profitgreen",
-    tags: ["AI", "FINTECH", "BOTS"],
+    tags: ["AI", "FINTECH", "APP"],
     name: "ProfitGreen",
     description:
       "An investing app with over 7K users that provides real-time financial data for thousands of stocks and cryptos. Received an $8K acquisition offer within the first year.",
@@ -105,7 +105,7 @@ export const projects: Project[] = [
   },
   {
     id: "disthread",
-    tags: ["BOTS", "SOCIAL"],
+    tags: ["APP", "SOCIAL"],
     name: "Disthread",
     description:
       "A social media app with 600 users that integrates Threads into Discord, automatically streaming posts from users' favorite Threads accounts into their Discord servers. Hit 500 users in under 1 month.",
@@ -132,7 +132,7 @@ export const projects: Project[] = [
   },
   {
     id: "cleetiverse",
-    tags: ["BOTS", "SOCIAL"],
+    tags: ["APP", "SOCIAL"],
     name: "Cleetiverse",
     description:
       "A commissioned project for a Discord bot that allows users to create, catch, breed, and battle custom creatures in a virtual world.",
