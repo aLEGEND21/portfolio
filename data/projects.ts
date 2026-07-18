@@ -34,21 +34,22 @@ export type Project = {
 export const projects: Project[] = [
   {
     id: "profitgreen",
-    tags: ["BOTS", "FINTECH"],
+    tags: ["AI", "FINTECH", "BOTS"],
     name: "ProfitGreen",
     description:
-      "An investing app with over 6,500 users that provides real-time financial data for thousands of stocks and cryptos, all within Discord.",
+      "An investing app with over 7K users that provides real-time financial data for thousands of stocks and cryptos. Received an $8K acquisition offer within the first year.",
     image: profitgreenImage,
     url: "https://profitgreen.app",
     featured: {
       order: 1,
       tier: "large",
-      oneLiner: "7K+ users. 1 acquisition offer. Financial data, powered by AI.",
+      oneLiner:
+        "7K+ users. 1 acquisition offer. Financial data, powered by AI.",
     },
   },
   {
     id: "alphanode",
-    tags: ["AI", "FINTECH"],
+    tags: ["AI", "FINTECH", "WEB"],
     name: "AlphaNode",
     description:
       "A stateful multi-agent equity research engine that uses LangGraph to orchestrate a deterministic parallel architecture, generating institutional-grade financial reports in seconds.",
@@ -58,7 +59,8 @@ export const projects: Project[] = [
     featured: {
       order: 2,
       tier: "medium",
-      oneLiner: "Institutional-grade equity research reports, generated in seconds.",
+      oneLiner:
+        "Institutional-grade equity research reports, generated in seconds.",
     },
   },
   {
@@ -73,44 +75,24 @@ export const projects: Project[] = [
     featured: {
       order: 3,
       tier: "medium",
-      oneLiner: "Let your agent shop for you. Get curated results without lifting a finger.",
+      oneLiner:
+        "Let your agent shop for you. Get curated results without lifting a finger.",
     },
   },
   {
-    id: "cleetiverse",
-    tags: ["BOTS", "GAMES"],
-    name: "Cleetiverse",
+    id: "sprinkl",
+    tags: ["AI", "APP"],
+    name: "Sprinkl",
     description:
-      "A commissioned project for a Discord bot that allows users to create, catch, breed, and battle custom creatures in a virtual world.",
-    image: cleetiverseImage,
-    url: "https://discord.com/oauth2/authorize?client_id=1038933964968173729&permissions=8&scope=applications.commands%20bot",
-  },
-  {
-    id: "hirespace",
-    tags: ["WEB"],
-    name: "HireSpace",
-    description:
-      "A platform for high school students to easily find and apply to internships. Built for the Summer Research & Innovation Program at the North Carolina School of Science and Mathematics.",
-    image: hirespaceImage,
-    url: "https://hirespace.arnavm.com",
-  },
-  {
-    id: "chatapp",
-    tags: ["WEB"],
-    name: "Chat App",
-    description:
-      "A real-time chat application with infinite chat rooms allowing users to communicate with anyone, anywhere around the world.",
-    image: chatappImage,
-    url: "https://chat.arnavm.com",
-  },
-  {
-    id: "disthread",
-    tags: ["BOTS", "SOCIAL"],
-    name: "Disthread",
-    description:
-      "A social media app used by over 600 users that integrates Threads into Discord, automatically streaming posts from users' favorite Threads accounts into their Discord servers. Achieved rapid growth, reaching 500 users in 1 month.",
-    image: disthreadImage,
-    url: "https://disthread.arnavm.com",
+      "Discover, search, and save recipes. Powered by AI-driven personalized recommendations (using scikit-learn and TF-IDF vectorization) and Google OAuth authentication.",
+    image: sprinklImage,
+    url: "https://github.com/aLEGEND21/Sprinkl",
+    featured: {
+      order: 4,
+      tier: "medium",
+      oneLiner:
+        "Tinder for recipes. Swipe, save, and cook your way through 9K+ dishes.",
+    },
   },
   {
     id: "screenlink",
@@ -122,11 +104,20 @@ export const projects: Project[] = [
     url: "https://github.com/aLEGEND21/screenlink",
   },
   {
+    id: "disthread",
+    tags: ["BOTS", "SOCIAL"],
+    name: "Disthread",
+    description:
+      "A social media app with 600 users that integrates Threads into Discord, automatically streaming posts from users' favorite Threads accounts into their Discord servers. Hit 500 users in under 1 month.",
+    image: disthreadImage,
+    url: "https://disthread.arnavm.com",
+  },
+  {
     id: "brainrotlang",
-    tags: ["WEB", "LANG"],
+    tags: ["WEB"],
     name: "Brainrot Lang",
     description:
-      "An online editor for a custom programming language based on brainrot (internet slang).",
+      "An online editor for a custom programming language based on brainrot (internet slang). Compile and run code directly in the browser.",
     image: brainrotlangImage,
     url: "https://brainrot.arnavm.com",
   },
@@ -140,32 +131,45 @@ export const projects: Project[] = [
     url: "https://github.com/aLEGEND21/publius",
   },
   {
-    id: "sprinkl",
-    tags: ["WEB", "AI"],
-    name: "Sprinkl",
+    id: "cleetiverse",
+    tags: ["BOTS", "SOCIAL"],
+    name: "Cleetiverse",
     description:
-      "A modern, full-stack web application for discovering, searching, and saving recipes, powered by AI-driven personalized recommendations and Google OAuth authentication.",
-    image: sprinklImage,
-    url: "https://github.com/aLEGEND21/Sprinkl",
-    featured: {
-      order: 4,
-      tier: "medium",
-      oneLiner: "Tinder for recipes. Swipe, save, and cook your way through 9K+ dishes.",
-    },
+      "A commissioned project for a Discord bot that allows users to create, catch, breed, and battle custom creatures in a virtual world.",
+    image: cleetiverseImage,
+    url: "https://discord.com/oauth2/authorize?client_id=1038933964968173729&permissions=8&scope=applications.commands%20bot",
+  },
+  {
+    id: "hirespace",
+    tags: ["WEB", "SOCIAL"],
+    name: "HireSpace",
+    description:
+      "A platform for high school students to easily find and apply to internships. Built for the Summer Research & Innovation Program at the North Carolina School of Science and Mathematics.",
+    image: hirespaceImage,
+    url: "https://hirespace.arnavm.com",
   },
   {
     id: "foodhub",
-    tags: ["WEB"],
+    tags: ["APP"],
     name: "FoodHub",
     description:
       "A modern food tracking application that helps you monitor your daily nutrition intake, track habits, and maintain a healthy lifestyle. Built with Next.js and MongoDB.",
     image: foodhubImage,
     url: "https://github.com/aLEGEND21/FoodHub",
   },
+  {
+    id: "chatapp",
+    tags: ["WEB"],
+    name: "Chat App",
+    description:
+      "A real-time chat application with infinite chat rooms allowing users to communicate with anyone, anywhere around the world.",
+    image: chatappImage,
+    url: "https://chat.arnavm.com",
+  },
 ];
 
 export const featuredProjects = projects
   .filter((p): p is Project & { featured: NonNullable<Project["featured"]> } =>
-    Boolean(p.featured)
+    Boolean(p.featured),
   )
   .sort((a, b) => a.featured.order - b.featured.order);
