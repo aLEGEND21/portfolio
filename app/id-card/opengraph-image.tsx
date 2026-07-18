@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 
+import { linkOrder } from "./components/SocialLinks";
 import { profile } from "./profile";
 
 export const alt = `${profile.name} — Contact Card`;
@@ -16,9 +17,9 @@ const inkFaint = "rgba(20, 30, 42, 0.55)";
 
 export default function Image() {
   const nameLines = profile.name.split(" ");
-  const links = Object.entries(profile.links)
-    .filter(([, url]) => !url.includes("TODO"))
-    .map(([key]) => key.toUpperCase());
+  const links = linkOrder.filter(
+    ({ key }) => !profile.links[key].includes("TODO")
+  );
 
   return new ImageResponse(
     (
@@ -42,12 +43,14 @@ export default function Image() {
             padding: 28,
             display: "flex",
             flexDirection: "column",
+            alignItems: "center",
             backgroundImage: `radial-gradient(circle at 16% 6%, ${frost} 0%, ${sky} 48%, ${cobalt} 100%)`,
             color: ink,
           }}
         >
           <div
             style={{
+              width: "100%",
               display: "flex",
               justifyContent: "space-between",
               fontSize: 13,
@@ -59,6 +62,7 @@ export default function Image() {
           </div>
           <div
             style={{
+              width: "100%",
               height: 1,
               backgroundColor: "rgba(20, 30, 42, 0.2)",
               marginTop: 16,
@@ -67,6 +71,7 @@ export default function Image() {
           />
           <div
             style={{
+              marginTop: "auto",
               width: 88,
               height: 88,
               borderRadius: 12,
@@ -84,6 +89,7 @@ export default function Image() {
             style={{
               display: "flex",
               flexDirection: "column",
+              alignItems: "center",
               marginTop: 32,
               fontSize: 44,
               fontWeight: 700,
@@ -96,16 +102,25 @@ export default function Image() {
           </div>
           <div
             style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
               marginTop: 14,
+              // Fixed space here biases the auto-margin split so the content
+              // block sits slightly above true center.
+              marginBottom: 28,
               fontSize: 14,
               letterSpacing: 1.5,
               color: inkFaint,
             }}
           >
-            {profile.university.toUpperCase()}
+            {profile.university.split(" · ").map((line) => (
+              <span key={line}>{line.toUpperCase()}</span>
+            ))}
           </div>
           <div
             style={{
+              width: "100%",
               marginTop: "auto",
               display: "flex",
               flexDirection: "column",
@@ -118,9 +133,16 @@ export default function Image() {
                 marginBottom: 14,
               }}
             />
-            <div style={{ display: "flex", gap: 12, fontSize: 12, letterSpacing: 1.5 }}>
-              {links.map((label) => (
-                <span key={label}>{label}</span>
+            <div
+              style={{
+                display: "flex",
+                gap: 20,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              {links.map(({ key, Icon }) => (
+                <Icon key={key} width={24} height={24} />
               ))}
             </div>
           </div>
