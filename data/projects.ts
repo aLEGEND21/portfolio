@@ -19,6 +19,8 @@ export type Project = {
   description: string;
   image: StaticImageData;
   url: string;
+  /** First tag should be one of the grid filter categories (WEB / AI / BOTS). */
+  tags: string[];
   /** Demo clip for the grayscale→color hover mechanic; image is used as poster/fallback. */
   videoSrc?: string;
   featured?: {
@@ -32,6 +34,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     id: "profitgreen",
+    tags: ["BOTS", "FINTECH"],
     name: "ProfitGreen",
     description:
       "An investing app with over 6,500 users that provides real-time financial data for thousands of stocks and cryptos, all within Discord.",
@@ -45,6 +48,7 @@ export const projects: Project[] = [
   },
   {
     id: "alphanode",
+    tags: ["AI", "FINTECH"],
     name: "AlphaNode",
     description:
       "A stateful multi-agent equity research engine that uses LangGraph to orchestrate a deterministic parallel architecture, generating institutional-grade financial reports in seconds.",
@@ -59,6 +63,7 @@ export const projects: Project[] = [
   },
   {
     id: "syntron",
+    tags: ["AI", "WEB"],
     name: "Syntron",
     description:
       "An agentic shopping search engine that turns natural-language queries into curated product results, powered by a LangGraph pipeline with real-time scraping.",
@@ -73,6 +78,7 @@ export const projects: Project[] = [
   },
   {
     id: "cleetiverse",
+    tags: ["BOTS", "GAMES"],
     name: "Cleetiverse",
     description:
       "A commissioned project for a Discord bot that allows users to create, catch, breed, and battle custom creatures in a virtual world.",
@@ -81,6 +87,7 @@ export const projects: Project[] = [
   },
   {
     id: "hirespace",
+    tags: ["WEB"],
     name: "HireSpace",
     description:
       "A platform for high school students to easily find and apply to internships. Built for the Summer Research & Innovation Program at the North Carolina School of Science and Mathematics.",
@@ -89,6 +96,7 @@ export const projects: Project[] = [
   },
   {
     id: "chatapp",
+    tags: ["WEB"],
     name: "Chat App",
     description:
       "A real-time chat application with infinite chat rooms allowing users to communicate with anyone, anywhere around the world.",
@@ -97,6 +105,7 @@ export const projects: Project[] = [
   },
   {
     id: "disthread",
+    tags: ["BOTS", "SOCIAL"],
     name: "Disthread",
     description:
       "A social media app used by over 600 users that integrates Threads into Discord, automatically streaming posts from users' favorite Threads accounts into their Discord servers. Achieved rapid growth, reaching 500 users in 1 month.",
@@ -105,6 +114,7 @@ export const projects: Project[] = [
   },
   {
     id: "screenlink",
+    tags: ["WEB"],
     name: "ScreenLink",
     description:
       "A modern, zero-install screen sharing platform built with Next.js. Users can share their screens with peers instantly using just a link or code.",
@@ -113,6 +123,7 @@ export const projects: Project[] = [
   },
   {
     id: "brainrotlang",
+    tags: ["WEB", "LANG"],
     name: "Brainrot Lang",
     description:
       "An online editor for a custom programming language based on brainrot (internet slang).",
@@ -121,6 +132,7 @@ export const projects: Project[] = [
   },
   {
     id: "publius",
+    tags: ["WEB"],
     name: "Publius",
     description:
       "An open-source browser-based image rating app. It uses an Elo-rating system to properly rank large numbers of images based on user input, through 1v1 matchups.",
@@ -129,6 +141,7 @@ export const projects: Project[] = [
   },
   {
     id: "sprinkl",
+    tags: ["WEB", "AI"],
     name: "Sprinkl",
     description:
       "A modern, full-stack web application for discovering, searching, and saving recipes, powered by AI-driven personalized recommendations and Google OAuth authentication.",
@@ -142,6 +155,7 @@ export const projects: Project[] = [
   },
   {
     id: "foodhub",
+    tags: ["WEB"],
     name: "FoodHub",
     description:
       "A modern food tracking application that helps you monitor your daily nutrition intake, track habits, and maintain a healthy lifestyle. Built with Next.js and MongoDB.",

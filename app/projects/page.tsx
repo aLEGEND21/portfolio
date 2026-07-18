@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/nav/Navbar";
-import { ProjectCard } from "@/components/projects/ProjectCard";
+import { ProjectsGrid } from "@/components/projects/ProjectsGrid";
 import { projects } from "@/data/projects";
 
 export const metadata: Metadata = {
@@ -10,7 +10,6 @@ export const metadata: Metadata = {
   description: "All projects by Arnav Murthi.",
 };
 
-// Stub listing page — the full projects page design comes later.
 export default function ProjectsPage() {
   return (
     <>
@@ -22,11 +21,7 @@ export default function ProjectsPage() {
         <h1 className="mt-4 font-display text-4xl leading-[1.15] md:text-5xl">
           All projects
         </h1>
-        <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </div>
+        <ProjectsGrid />
       </main>
       <Footer />
     </>
