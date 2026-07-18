@@ -37,7 +37,7 @@ function blockProps(
 // with the "all projects" cell. No gaps — light borders separate everything.
 export function FeaturedProjects() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
   const reducedMotion = usePrefersReducedMotion();
 
   // On mobile the section catches up to the departing hero: it rises slightly
@@ -65,9 +65,9 @@ export function FeaturedProjects() {
     <section
       ref={sectionRef}
       id="projects"
-      className="scroll-mt-0 pt-16 will-change-transform md:scroll-mt-16 md:pt-32"
+      className="scroll-mt-0 pt-16 will-change-transform lg:scroll-mt-16 lg:pt-32"
     >
-      <div className="mx-auto mb-10 w-full max-w-[1400px] px-6 md:mb-14 md:px-12">
+      <div className="mx-auto mb-10 w-full max-w-[1400px] px-6 lg:mb-14 lg:px-12">
         <h2 className="text-center font-mono text-[13px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
           Project Highlights
         </h2>
@@ -78,18 +78,18 @@ export function FeaturedProjects() {
           <ProjectBlock {...blockProps(0, "flagship")} />
 
           {/* Row 2 — secondary + tertiary side by side */}
-          <div className="grid divide-y divide-border border-t border-border md:grid-cols-2 md:divide-x md:divide-y-0">
+          <div className="grid divide-y divide-border border-t border-border lg:grid-cols-2 lg:divide-x lg:divide-y-0">
             <ProjectBlock {...blockProps(1, "stacked")} />
             <ProjectBlock {...blockProps(2, "stacked")} />
           </div>
 
           {/* Row 3 — fourth project + all-projects link cell */}
-          <div className="grid divide-y divide-border border-t border-border md:grid-cols-3 md:divide-x md:divide-y-0">
-            <div className="md:col-span-2">
+          <div className="grid divide-y divide-border border-t border-border lg:grid-cols-4 lg:divide-x lg:divide-y-0 xl:grid-cols-3">
+            <div className="lg:col-span-3 xl:col-span-2">
               <ProjectBlock
                 {...blockProps(3, "stacked")}
                 className="h-full"
-                mediaClassName="md:h-[62vh]"
+                mediaClassName="lg:h-[62vh]"
               />
             </div>
             <SeeAllTile />

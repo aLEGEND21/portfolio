@@ -83,7 +83,7 @@ export function ProjectBlock({
         </span>
         {name}
       </p>
-      <h3 className="mt-4 max-w-[420px] font-display text-[26px] leading-[1.2] md:text-[32px]">
+      <h3 className="mt-4 max-w-[420px] font-display text-[26px] leading-[1.2] lg:text-[32px]">
         {oneLiner}
       </h3>
     </div>
@@ -106,20 +106,20 @@ export function ProjectBlock({
       )}
     >
       {variant === "flagship" ? (
-        <div className="grid md:grid-cols-3">
+        <div className="grid lg:grid-cols-4 xl:grid-cols-3">
           <div
             ref={mediaViewRef}
-            className="relative aspect-video md:col-span-2 md:aspect-auto md:h-[70vh]"
+            className="relative aspect-video lg:col-span-3 lg:aspect-auto lg:h-[70vh] xl:col-span-2"
           >
             <ProjectMedia
               image={image}
               alt={`Screenshot of ${name}`}
               videoSrc={videoSrc}
               isActive={isActive}
-              sizes="(max-width: 768px) 100vw, 66vw"
+              sizes="(max-width: 1024px) 100vw, (max-width: 1280px) 75vw, 66vw"
             />
           </div>
-          <div className="flex items-center border-t border-border px-6 py-10 transition-colors duration-300 group-hover:bg-white/[0.02] md:border-l md:border-t-0 md:px-12">
+          <div className="flex items-center border-t border-border px-6 py-10 transition-colors duration-300 group-hover:bg-white/[0.02] lg:border-l lg:border-t-0 lg:px-8 xl:px-12">
             {text}
           </div>
         </div>
@@ -128,7 +128,7 @@ export function ProjectBlock({
           <div
             ref={mediaViewRef}
             className={cn(
-              "relative aspect-video flex-none md:aspect-auto md:h-[48vh]",
+              "relative aspect-video flex-none lg:aspect-auto lg:h-[48vh]",
               mediaClassName
             )}
           >
@@ -137,10 +137,10 @@ export function ProjectBlock({
               alt={`Screenshot of ${name}`}
               videoSrc={videoSrc}
               isActive={isActive}
-              sizes="(max-width: 768px) 100vw, 50vw"
+              sizes="(max-width: 1024px) 100vw, 50vw"
             />
           </div>
-          <div className="flex-1 border-t border-border px-6 py-8 transition-colors duration-300 group-hover:bg-white/[0.02] md:px-10 md:py-10">
+          <div className="flex-1 border-t border-border px-6 py-8 transition-colors duration-300 group-hover:bg-white/[0.02] lg:px-10 lg:py-10">
             {text}
           </div>
         </div>

@@ -49,7 +49,7 @@ export function Navbar() {
             : "border-b border-transparent bg-transparent"
         )}
       >
-        <div className="mx-auto flex h-16 w-full max-w-[1400px] items-center justify-between px-6 md:px-12">
+        <div className="mx-auto flex h-16 w-full max-w-[1400px] items-center justify-between px-6 lg:px-12">
           <Link
             href="/"
             className="group relative font-mono text-[13px] font-medium uppercase tracking-[0.06em]"

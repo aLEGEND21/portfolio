@@ -18,7 +18,7 @@ export function Hero() {
   const globeRef = useRef<HTMLDivElement>(null);
   const mobileGlobeRef = useRef<HTMLDivElement>(null);
   const reducedMotion = usePrefersReducedMotion();
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
   // Mount the (single) globe instance only after the breakpoint is known,
   // so we never run two WebGL contexts for the desktop + mobile slots.
   const hydrated = useHydrated();
@@ -52,27 +52,31 @@ export function Hero() {
 
   return (
     <section id="hero" className="relative overflow-x-clip">
-      <div className="relative flex min-h-dvh flex-col items-center justify-center gap-10 pt-6 pb-16 max-md:[@media(max-height:700px)]:gap-6 max-md:[@media(max-height:700px)]:pb-10 md:flex-row md:gap-0 md:pt-0 md:pb-0">
+      <div className="relative flex min-h-dvh flex-col items-center justify-center gap-10 pt-6 pb-16 max-lg:[@media(max-height:700px)]:gap-6 max-lg:[@media(max-height:700px)]:pb-10 md:max-lg:[@media(min-height:700px)]:gap-14 lg:flex-row lg:gap-0 lg:pt-0 lg:pb-0">
         <div
           ref={globeRef}
-          className="pointer-events-none absolute inset-y-0 right-[-4%] hidden w-[55%] items-center justify-end will-change-transform md:flex lg:right-[4%]"
+          className="pointer-events-none absolute inset-y-0 right-[4%] hidden w-[55%] items-center justify-end will-change-transform lg:flex"
         >
-          {hydrated && isDesktop && <Globe className="max-w-[min(640px,80vh)]" />}
+          {hydrated && isDesktop && (
+            // Scales with the viewport until xl so it clears the text block
+            // on narrow-desktop widths (e.g. iPad landscape).
+            <Globe className="max-w-[min(42vw,80vh)] xl:max-w-[min(640px,80vh)]" />
+          )}
         </div>
         <div
           ref={textRef}
-          className="relative z-10 mx-auto w-full max-w-[1400px] px-6 text-center will-change-transform md:px-12 md:text-left"
+          className="relative z-10 mx-auto w-full max-w-[1400px] px-6 text-center will-change-transform lg:px-12 lg:text-left"
         >
           <p className="font-mono text-[13px] font-medium uppercase tracking-[0.06em] text-muted-foreground">
             Software Engineer — Chapel Hill, NC
           </p>
-          <h1 className="mt-4 font-display text-[44px] leading-[1.1] max-md:[@media(max-height:700px)]:mt-3 max-md:[@media(max-height:700px)]:text-[36px] md:text-[80px]">
+          <h1 className="mt-4 font-display text-[44px] leading-[1.1] max-lg:[@media(max-height:700px)]:mt-3 max-lg:[@media(max-height:700px)]:text-[36px] md:max-lg:[@media(min-height:700px)]:text-[64px] lg:text-[64px] xl:text-[80px]">
             Arnav Murthi
           </h1>
-          <p className="mt-5 font-mono text-base leading-[1.4] md:text-xl">
+          <p className="mt-5 font-mono text-base leading-[1.4] md:max-lg:[@media(min-height:700px)]:text-xl lg:text-lg xl:text-xl">
             <Typewriter />
           </p>
-          <p className="mx-auto mt-6 max-w-[480px] px-4 text-base leading-[1.6] text-muted-foreground max-md:[@media(max-height:700px)]:mt-4 md:mx-0 md:px-0 md:text-lg">
+          <p className="mx-auto mt-6 max-w-[480px] px-4 text-base leading-[1.6] text-muted-foreground max-lg:[@media(max-height:700px)]:mt-4 md:max-lg:[@media(min-height:700px)]:max-w-[560px] md:max-lg:[@media(min-height:700px)]:text-lg lg:mx-0 lg:px-0 lg:text-lg">
             Shipping products from first commit to thousands of users.
           </p>
         </div>
@@ -80,16 +84,18 @@ export function Hero() {
         {/* On mobile the globe shares the first viewport with the text. */}
         <div
           ref={mobileGlobeRef}
-          className="flex w-full justify-center px-10 md:hidden"
+          className="flex w-full justify-center px-10 lg:hidden"
         >
           {hydrated && !isDesktop && (
-            <Globe className="max-w-[280px] [@media(max-height:700px)]:max-w-[210px]" />
+            // Portrait tablets (md–lg, tall screens) get a much larger globe
+            // to fill the vertical room; short landscapes keep the small one.
+            <Globe className="max-w-[280px] [@media(max-height:700px)]:max-w-[210px] md:[@media(min-height:700px)]:max-w-[min(560px,48vh)]" />
           )}
         </div>
 
         <div
           aria-hidden
-          className="absolute inset-x-0 bottom-8 hidden justify-center md:flex"
+          className="absolute inset-x-0 bottom-8 hidden justify-center lg:flex"
         >
           <ChevronDown className="size-5 animate-cue-bounce text-faint motion-reduce:animate-none" />
         </div>

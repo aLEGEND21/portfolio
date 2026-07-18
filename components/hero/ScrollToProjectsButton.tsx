@@ -23,7 +23,7 @@ export function ScrollToProjectsButton() {
   return (
     <div
       ref={wrapperRef}
-      className="fixed inset-x-0 z-40 flex justify-center md:hidden"
+      className="fixed inset-x-0 z-40 flex justify-center lg:hidden"
       style={{ bottom: "calc(env(safe-area-inset-bottom, 0px) + 24px)" }}
     >
       <button
