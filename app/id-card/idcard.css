@@ -1,0 +1,15 @@
+/* Design tokens for the id.arnavm.com contact card, scoped to this route's
+ * stage element so they never leak into the portfolio's theme. Palette is
+ * lifted from the YC ticket artwork (warm cream→amber→ember gradient on
+ * near-black brown ink). */
+.idcard-stage {
+  --ink: #2a1e14;
+  --cream: #f4ddb2;
+  --amber: #f0a94e;
+  --ember: #e2601c;
+  --highlight: #fbf0dc;
+  --ink-15: rgba(42, 30, 20, 0.15);
+  /* Shared by the card shell and the glare overlay so they clip identically
+   * (the site-wide --radius is 0, so this is set explicitly). */
+  --card-radius: 18px;
+}
