@@ -13,7 +13,7 @@ export function IDCard() {
   const initials = nameLines.map((w) => w[0]).join("");
 
   return (
-    <div className="w-[min(92vw,55dvh,380px)] [container-type:inline-size]">
+    <div className="w-[min(92vw,var(--card-size-cap,55dvh),380px)] transition-[width] duration-300 [container-type:inline-size]">
       <article
         className="relative flex aspect-[1/1.58] w-full flex-col rounded-[var(--card-radius)] p-[7cqw] text-[var(--ink)] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.65)]"
         style={{

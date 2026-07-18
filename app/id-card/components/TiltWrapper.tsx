@@ -17,7 +17,16 @@ export function TiltWrapper({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="flex flex-col items-center gap-6">
+    // While the iOS permission button is in flow, tighten the card's height
+    // cap so card + button still fit the viewport without scrolling.
+    <div
+      className="flex flex-col items-center gap-6"
+      style={
+        tilt.needsGyroPermission
+          ? ({ "--card-size-cap": "48dvh" } as React.CSSProperties)
+          : undefined
+      }
+    >
       <div
         style={{ perspective: 1200 }}
         onMouseMove={tilt.canHover ? tilt.onMouseMove : undefined}
