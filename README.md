@@ -10,8 +10,8 @@ shadcn/ui, and [cobe](https://github.com/shuding/cobe) for the globe.
 Requires Node.js 20+.
 
 ```bash
-git clone https://github.com/aLEGEND21/portfolio-website-v2.git
-cd portfolio-website-v2
+git clone https://github.com/aLEGEND21/portfolio.git
+cd portfolio
 npm install
 npm run dev
 ```

@@ -3,7 +3,7 @@ name: verify
 description: Build, run, and drive this portfolio site to verify changes at the browser surface, including a mobile-Safari-like viewport.
 ---
 
-# Verifying portfolio-website-v2
+# Verifying portfolio
 
 ## Build & serve
 
