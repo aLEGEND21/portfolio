@@ -11,7 +11,7 @@ export function GlareOverlay({
   glareX: MotionValue<number>;
   glareY: MotionValue<number>;
 }) {
-  const background = useMotionTemplate`radial-gradient(130% 90% at ${glareX}% ${glareY}%, var(--highlight) 0%, rgba(251, 240, 220, 0) 55%)`;
+  const background = useMotionTemplate`radial-gradient(130% 90% at ${glareX}% ${glareY}%, var(--highlight) 0%, rgba(220, 240, 251, 0) 55%)`;
   return (
     <motion.div
       aria-hidden

@@ -18,7 +18,7 @@ export function IDCard() {
         className="relative flex aspect-[1/1.58] w-full flex-col rounded-[var(--card-radius)] p-[7cqw] text-[var(--ink)] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.65)]"
         style={{
           background:
-            "radial-gradient(135% 115% at 16% 6%, var(--cream) 0%, var(--amber) 48%, var(--ember) 100%)",
+            "radial-gradient(135% 115% at 16% 6%, var(--frost) 0%, var(--sky) 48%, var(--cobalt) 100%)",
         }}
       >
         {/* Static off-center bloom — the tilt-reactive glare layers on top. */}
@@ -31,7 +31,7 @@ export function IDCard() {
           }}
         />
 
-        <header className="flex items-baseline justify-between font-mono text-[3.4cqw] font-medium uppercase tracking-[0.18em] text-[var(--ink)]/70">
+        <header className="flex items-baseline justify-between font-mono text-[3.4cqw] font-medium uppercase tracking-[0.18em] text-[var(--ink)]/85">
           <span>Contact Card</span>
           <span>N&ordm; {profile.issued}</span>
         </header>
@@ -58,12 +58,12 @@ export function IDCard() {
               as one aligned row. */}
           <dl className="flex h-[26cqw] flex-col justify-between text-right font-mono text-[3.6cqw] uppercase tracking-[0.12em]">
             <div>
-              <dt className="text-[var(--ink)]/50">Location</dt>
-              <dd className="text-[var(--ink)]/80">{profile.location}</dd>
+              <dt className="text-[var(--ink)]/60">Location</dt>
+              <dd className="text-[var(--ink)]/90">{profile.location}</dd>
             </div>
             <div>
-              <dt className="text-[var(--ink)]/50">Class</dt>
-              <dd className="text-[var(--ink)]/80">{profile.classYear}</dd>
+              <dt className="text-[var(--ink)]/60">Class</dt>
+              <dd className="text-[var(--ink)]/90">{profile.classYear}</dd>
             </div>
           </dl>
         </div>
@@ -79,11 +79,11 @@ export function IDCard() {
           ))}
         </h1>
 
-        <p className="mt-[2.5cqw] font-mono text-[3.6cqw] font-medium uppercase tracking-[0.06em] text-[var(--ink)]/80">
+        <p className="mt-[2.5cqw] font-mono text-[3.6cqw] font-medium uppercase tracking-[0.06em] text-[var(--ink)]/90">
           {profile.university}
         </p>
 
-        <p className="mt-[4cqw] font-mono text-[3.8cqw] leading-[1.55] text-[var(--ink)]/75">
+        <p className="mt-[4cqw] font-mono text-[3.8cqw] leading-[1.55] text-[var(--ink)]/90">
           {profile.bio}
         </p>
 

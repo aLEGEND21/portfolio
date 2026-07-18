@@ -8,11 +8,11 @@ export const contentType = "image/png";
 
 // Token values are hardcoded here because Satori can't read the route's CSS
 // variables — keep in sync with app/id-card/idcard.css.
-const ink = "#2a1e14";
-const cream = "#f4ddb2";
-const amber = "#f0a94e";
-const ember = "#e2601c";
-const inkFaint = "rgba(42, 30, 20, 0.55)";
+const ink = "#141e2a";
+const frost = "#b2ddf4";
+const sky = "#4ea9f0";
+const cobalt = "#1c60e2";
+const inkFaint = "rgba(20, 30, 42, 0.55)";
 
 export default function Image() {
   const nameLines = profile.name.split(" ");
@@ -42,7 +42,7 @@ export default function Image() {
             padding: 28,
             display: "flex",
             flexDirection: "column",
-            backgroundImage: `radial-gradient(circle at 16% 6%, ${cream} 0%, ${amber} 48%, ${ember} 100%)`,
+            backgroundImage: `radial-gradient(circle at 16% 6%, ${frost} 0%, ${sky} 48%, ${cobalt} 100%)`,
             color: ink,
           }}
         >
@@ -60,7 +60,7 @@ export default function Image() {
           <div
             style={{
               height: 1,
-              backgroundColor: "rgba(42, 30, 20, 0.2)",
+              backgroundColor: "rgba(20, 30, 42, 0.2)",
               marginTop: 16,
               marginBottom: 24,
             }}
@@ -70,7 +70,7 @@ export default function Image() {
               width: 88,
               height: 88,
               borderRadius: 12,
-              border: "1px solid rgba(42, 30, 20, 0.2)",
+              border: "1px solid rgba(20, 30, 42, 0.2)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -114,7 +114,7 @@ export default function Image() {
             <div
               style={{
                 height: 1,
-                backgroundColor: "rgba(42, 30, 20, 0.2)",
+                backgroundColor: "rgba(20, 30, 42, 0.2)",
                 marginBottom: 14,
               }}
             />
@@ -132,10 +132,10 @@ export default function Image() {
             display: "flex",
             flexDirection: "column",
             maxWidth: 520,
-            color: cream,
+            color: frost,
           }}
         >
-          <div style={{ fontSize: 20, letterSpacing: 4, color: amber }}>
+          <div style={{ fontSize: 20, letterSpacing: 4, color: sky }}>
             ID.ARNAVM.COM
           </div>
           <div
@@ -153,7 +153,7 @@ export default function Image() {
               marginTop: 20,
               fontSize: 24,
               lineHeight: 1.5,
-              color: "rgba(244, 221, 178, 0.75)",
+              color: "rgba(178, 221, 244, 0.75)",
             }}
           >
             {profile.bio}
