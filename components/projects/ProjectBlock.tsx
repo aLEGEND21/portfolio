@@ -21,7 +21,8 @@ export type ProjectBlockProps = {
   oneLiner: string;
   /**
    * flagship — full-width row, media beside a text panel.
-   * stacked — text panel on top, media below (half/two-thirds cells).
+   * stacked — media with a text panel; the panel sits below on mobile and
+   *   above on desktop (half/two-thirds cells).
    */
   variant: "flagship" | "stacked";
   /** Large low-opacity mono anchor, e.g. "01". */
@@ -131,12 +132,10 @@ export function ProjectBlock({
           </div>
         </div>
       ) : (
-        // Caption above media so a screenshot never shares a horizontal seam
-        // with the screenshot in the row above — the text panel is the spacer.
-        <div className="flex h-full flex-col">
-          <div className="flex-1 border-b border-white/15 px-6 py-8 transition-colors duration-300 group-hover:bg-white/[0.02] lg:px-10 lg:py-10">
-            {text}
-          </div>
+        // Mobile: media then caption, matching the flagship. Desktop: the
+        // column flips so the caption sits above the media and no screenshot
+        // shares a horizontal seam with the one in the row above.
+        <div className="flex h-full flex-col lg:flex-col-reverse">
           <div
             ref={mediaViewRef}
             className={cn(
@@ -151,6 +150,9 @@ export function ProjectBlock({
               isActive={isActive}
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
+          </div>
+          <div className="flex-1 border-t border-white/15 px-6 py-8 transition-colors duration-300 group-hover:bg-white/[0.02] lg:border-b lg:border-t-0 lg:px-10 lg:py-10">
+            {text}
           </div>
         </div>
       )}
