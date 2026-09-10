@@ -21,7 +21,7 @@ export type ProjectBlockProps = {
   oneLiner: string;
   /**
    * flagship — full-width row, media beside a text panel.
-   * stacked — media on top, text panel below (half/two-thirds cells).
+   * stacked — text panel on top, media below (half/two-thirds cells).
    */
   variant: "flagship" | "stacked";
   /** Large low-opacity mono anchor, e.g. "01". */
@@ -83,7 +83,14 @@ export function ProjectBlock({
         </span>
         {name}
       </p>
-      <h3 className="mt-4 max-w-[420px] font-display text-[26px] leading-[1.2] lg:text-[32px]">
+      <h3
+        className={cn(
+          "mt-4 font-display text-[26px] leading-[1.2] lg:text-[32px]",
+          // The flagship side panel is narrow, so its measure is capped tight.
+          // Stacked cells are half to two-thirds of the row; let the line run.
+          variant === "flagship" ? "max-w-[420px]" : "max-w-[720px]"
+        )}
+      >
         {oneLiner}
       </h3>
     </div>
@@ -119,12 +126,17 @@ export function ProjectBlock({
               sizes="(max-width: 1024px) 100vw, (max-width: 1280px) 75vw, 66vw"
             />
           </div>
-          <div className="flex items-center border-t border-border px-6 py-10 transition-colors duration-300 group-hover:bg-white/[0.02] lg:border-l lg:border-t-0 lg:px-8 xl:px-12">
+          <div className="flex items-center border-t border-white/15 px-6 py-10 transition-colors duration-300 group-hover:bg-white/[0.02] lg:border-l lg:border-t-0 lg:px-8 xl:px-12">
             {text}
           </div>
         </div>
       ) : (
+        // Caption above media so a screenshot never shares a horizontal seam
+        // with the screenshot in the row above — the text panel is the spacer.
         <div className="flex h-full flex-col">
+          <div className="flex-1 border-b border-white/15 px-6 py-8 transition-colors duration-300 group-hover:bg-white/[0.02] lg:px-10 lg:py-10">
+            {text}
+          </div>
           <div
             ref={mediaViewRef}
             className={cn(
@@ -139,9 +151,6 @@ export function ProjectBlock({
               isActive={isActive}
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
-          </div>
-          <div className="flex-1 border-t border-border px-6 py-8 transition-colors duration-300 group-hover:bg-white/[0.02] lg:px-10 lg:py-10">
-            {text}
           </div>
         </div>
       )}
