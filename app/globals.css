@@ -44,8 +44,8 @@
   --animate-blob-drift: blob-drift 14s ease-in-out infinite;
   --animate-star-drift: star-drift 8s linear infinite;
 
-  /* Shooting star travelling along its own (pre-rotated) x axis, fading in
-     and out so the loop restart is never visible. Distance and peak
+  /* Hero shooting star: travels along its own (pre-rotated) x axis, fading
+     in and out so the loop restart is never visible. Distance and peak
      opacity come from per-star custom properties. */
   @keyframes star-drift {
     0% {

@@ -139,7 +139,7 @@ export function Hero() {
       <div ref={backdropRef} className="absolute inset-0">
         <HeroBackdrop />
       </div>
-      <div className="relative mx-auto grid min-h-dvh w-full max-w-[1400px] content-center items-center gap-10 px-6 pb-10 pt-16 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start lg:gap-20 lg:px-12 lg:py-20">
+      <div className="relative mx-auto grid min-h-dvh w-full max-w-[1400px] content-center items-center gap-10 px-6 pb-10 pt-28 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start lg:gap-20 lg:px-12 lg:py-20">
         <div
           ref={textRef}
           // On desktop the text column top-aligns with the card, offset by the
@@ -166,20 +166,23 @@ export function Hero() {
           </h1>
           <p
             className={cn(
-              "mx-auto mt-6 max-w-[36rem] text-balance font-mono text-[15px] leading-[1.75] text-muted-foreground lg:mx-0 lg:mt-7 lg:max-w-[40rem] lg:text-pretty lg:text-[19px] xl:max-w-[44rem] xl:text-[22px]",
+              "mx-auto mt-4 max-w-[36rem] text-balance font-mono text-[15px] leading-[1.75] text-muted-foreground lg:mx-0 lg:mt-7 lg:max-w-[40rem] lg:text-pretty lg:text-[19px] xl:max-w-[44rem] xl:text-[22px]",
               rise,
               "motion-safe:delay-150"
             )}
           >
-            Full-stack engineer and founder. I built{" "}
-            <span className="text-foreground">ProfitGreen</span>, an investing
-            app with <span className="text-foreground">7,000+ users</span> that
-            drew an acquisition offer.
+            Full-stack engineer and founder. Built{" "}
+            <span className="text-foreground">ProfitGreen</span>, a finance app
+            with{" "}
+            <span className="whitespace-nowrap text-foreground">
+              7,000+ users
+            </span>{" "}
+            that received an acquisition offer.
           </p>
 
           <div
             className={cn(
-              "mt-7 flex justify-center lg:justify-start xl:mt-9",
+              "mt-5 flex justify-center lg:mt-7 lg:justify-start xl:mt-9",
               rise,
               "motion-safe:delay-200"
             )}
