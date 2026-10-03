@@ -166,7 +166,7 @@ export function Hero() {
           </h1>
           <p
             className={cn(
-              "mx-auto mt-4 max-w-[36rem] text-balance font-mono text-[15px] leading-[1.75] text-muted-foreground lg:mx-0 lg:mt-7 lg:max-w-[40rem] lg:text-pretty lg:text-[19px] xl:max-w-[44rem] xl:text-[22px]",
+              "mx-auto mt-4 max-w-[36rem] text-balance font-copy text-[15px] leading-[1.6] tracking-[-0.011em] text-muted-foreground lg:mx-0 lg:mt-7 lg:max-w-[40rem] lg:text-pretty lg:text-[19px] xl:max-w-[44rem] xl:text-[22px]",
               rise,
               "motion-safe:delay-150"
             )}
@@ -182,7 +182,7 @@ export function Hero() {
 
           <div
             className={cn(
-              "mt-5 flex justify-center lg:mt-7 lg:justify-start xl:mt-9",
+              "mt-[17px] flex justify-center lg:mt-[21px] lg:justify-start xl:mt-[29px]",
               rise,
               "motion-safe:delay-200"
             )}
