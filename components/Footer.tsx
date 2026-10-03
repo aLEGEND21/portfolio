@@ -1,4 +1,7 @@
+import { Mail } from "lucide-react";
 import type { ComponentProps } from "react";
+
+import { profile } from "@/app/id-card/profile";
 
 // lucide dropped its brand icons, so these are inlined (simple-icons paths).
 function GitHubIcon(props: ComponentProps<"svg">) {
@@ -19,13 +22,18 @@ function LinkedInIcon(props: ComponentProps<"svg">) {
 
 const socialLinks = [
   {
+    label: "Email",
+    href: `mailto:${profile.email}`,
+    Icon: Mail,
+  },
+  {
     label: "GitHub",
-    href: "https://github.com/aLEGEND21",
+    href: profile.links.github,
     Icon: GitHubIcon,
   },
   {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/arnav-murthi",
+    href: profile.links.linkedin,
     Icon: LinkedInIcon,
   },
 ];
@@ -34,16 +42,17 @@ export function Footer() {
   return (
     <footer className="border-t border-border">
       <div className="mx-auto flex w-full max-w-[1400px] flex-col gap-6 px-6 py-10 lg:flex-row lg:items-center lg:justify-between lg:px-12">
-        <p className="text-sm text-faint">
+        <p className="font-mono text-[13px] font-medium uppercase tracking-[0.06em] text-muted-foreground">
           © {new Date().getFullYear()} Arnav Murthi
         </p>
-        <div className="flex items-center gap-8">
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-3 sm:gap-8">
           {socialLinks.map(({ label, href, Icon }) => (
             <a
               key={label}
               href={href}
-              target="_blank"
-              rel="noopener noreferrer"
+              {...(href.startsWith("mailto:")
+                ? {}
+                : { target: "_blank", rel: "noopener noreferrer" })}
               className="flex items-center gap-2 font-mono text-[13px] font-medium uppercase tracking-[0.06em] text-muted-foreground transition-colors hover:text-accent-hover"
             >
               <Icon className="size-4" />

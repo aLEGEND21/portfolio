@@ -1,107 +1,217 @@
 "use client";
 
-import { ChevronDown } from "lucide-react";
-import { useRef } from "react";
+import { ArrowDown } from "lucide-react";
+import { useEffect, useRef } from "react";
 
-import { Globe } from "@/components/hero/Globe";
-import { ScrollToProjectsButton } from "@/components/hero/ScrollToProjectsButton";
-import { Typewriter } from "@/components/hero/Typewriter";
-import {
-  useHydrated,
-  useMediaQuery,
-  usePrefersReducedMotion,
-} from "@/lib/hooks/useMediaQuery";
+import { profile } from "@/app/id-card/profile";
+import { HeroBackdrop } from "@/components/hero/HeroBackdrop";
+import { HeroCard } from "@/components/hero/HeroCard";
+import { usePrefersReducedMotion } from "@/lib/hooks/useMediaQuery";
 import { useScrollY } from "@/lib/hooks/useScrollY";
+import { cn } from "@/lib/utils";
+
+// Staggered load-in; tw-animate-css utilities, skipped under reduced motion.
+const rise =
+  "motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-3 motion-safe:fill-mode-both motion-safe:duration-700 motion-safe:ease-out";
+
+// Where the content's bottom edge sits, as a fraction of the viewport, at
+// the moment it fully fades and meets the projects label — near the top of
+// the screen, so the label has nearly arrived by the time the hero is gone.
+const EXIT_LINE = 0.06;
+
+function pageTop(el: HTMLElement) {
+  let top = 0;
+  let node: HTMLElement | null = el;
+  while (node) {
+    top += node.offsetTop;
+    node = node.offsetParent as HTMLElement | null;
+  }
+  return top;
+}
+
+type ExitMetrics = { start: number; lag: number; fadeDistance: number };
 
 export function Hero() {
+  const sectionRef = useRef<HTMLElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
-  const globeRef = useRef<HTMLDivElement>(null);
-  const mobileGlobeRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const backdropRef = useRef<HTMLDivElement>(null);
+  // Layout-derived scroll-out constants; cleared on resize and re-measured
+  // on the next frame, so scrolling itself does no layout reads.
+  const metrics = useRef<ExitMetrics | null>(null);
   const reducedMotion = usePrefersReducedMotion();
-  const isDesktop = useMediaQuery("(min-width: 1024px)");
-  // Mount the (single) globe instance only after the breakpoint is known,
-  // so we never run two WebGL contexts for the desktop + mobile slots.
-  const hydrated = useHydrated();
 
+  // Scroll-out: the hero content lags the scroll (still rising, just
+  // slower) and fades, timed from the layout so it reaches zero opacity
+  // right as its lowest edge meets the "Selected work" label coming up from
+  // below — no overlap, and no empty band between the two. The transforms
+  // live on wrapper divs because the load-in animation inside them owns
+  // `transform` while it fills.
   useScrollY((y) => {
-    const text = textRef.current;
-    const globe = globeRef.current;
-    const mobileGlobe = mobileGlobeRef.current;
-    if (reducedMotion) return;
-    const fadeDistance = window.innerHeight * 0.7;
-    const opacity = String(Math.max(0, 1 - y / fadeDistance));
-    if (text) {
-      text.style.transform = `translateY(${y * -0.15}px)`;
-      text.style.opacity = opacity;
+    const els = [textRef.current, cardRef.current].filter(
+      (el): el is HTMLDivElement => el !== null
+    );
+    const backdrop = backdropRef.current;
+
+    // Clear rather than skip: the first client frame runs before the
+    // reduced-motion query resolves, and may already have written styles.
+    if (reducedMotion) {
+      for (const el of els) {
+        el.style.transform = "";
+        el.style.opacity = "";
+        el.style.pointerEvents = "";
+      }
+      if (backdrop) {
+        backdrop.style.opacity = "";
+        delete backdrop.dataset.paused;
+      }
+      return;
     }
-    // Globe moves faster than the text so both clear together.
-    if (globe) {
-      globe.style.transform = `translateY(${y * -0.35}px)`;
-      globe.style.opacity = opacity;
-    }
-    // On mobile the globe lags the scroll — still rising on screen, just
-    // slower — and fades out fully right as the projects header (~1vh + its
-    // padding into the page) is about to reach the top and overlap it.
-    if (mobileGlobe) {
-      mobileGlobe.style.transform = `translateY(${y * 0.25}px)`;
-      mobileGlobe.style.opacity = String(
-        Math.max(0, 1 - y / window.innerHeight)
+
+    if (!metrics.current) {
+      const label = document.getElementById("projects-label");
+      if (els.length === 0 || !label) return;
+      // Untransformed layout positions (offsetTop ignores transforms).
+      const contentBottom = Math.max(
+        ...els.map((el) => pageTop(el) + el.offsetHeight)
       );
+      const gap = Math.max(0, pageTop(label) - contentBottom);
+      const vh = window.innerHeight;
+      // Content taller than the screen (phones) holds still until its bottom
+      // edge has been on screen, so nothing fades before it's been read.
+      const start = Math.max(0, contentBottom - vh);
+      // Lag rate chosen so the label closes the gap exactly when the
+      // content's bottom has risen to the exit line near the top of the
+      // screen.
+      const travel = Math.max(1, contentBottom - start - vh * EXIT_LINE);
+      metrics.current = {
+        start,
+        lag: gap / (travel + gap),
+        fadeDistance: travel + gap,
+      };
+    }
+
+    const { start, lag, fadeDistance } = metrics.current;
+    const past = Math.max(0, y - start);
+    const transform = `translateY(${past * lag}px)`;
+    // Ease-in: stays mostly opaque early, dropping away near the exit line.
+    const progress = Math.min(1, past / fadeDistance);
+    const opacity = String(1 - progress * progress);
+    for (const el of els) {
+      el.style.transform = transform;
+      el.style.opacity = opacity;
+      // Fully faded content mustn't keep catching clicks.
+      el.style.pointerEvents = progress >= 1 ? "none" : "";
+    }
+    // Stars clear out well ahead of the content, so none show through the
+    // card as it turns translucent on the way out; once gone, they pause.
+    if (backdrop) {
+      const starOpacity = Math.max(0, 1 - progress * 2.5);
+      backdrop.style.opacity = String(starOpacity);
+      backdrop.dataset.paused = String(starOpacity === 0);
     }
   });
 
+  // Re-measure on viewport resizes and on hero size changes (font swap,
+  // breakpoint reflow), and re-apply when the motion preference flips. The
+  // synthetic scroll event runs the callback above on the next frame.
+  useEffect(() => {
+    const remeasure = () => {
+      metrics.current = null;
+      window.dispatchEvent(new Event("scroll"));
+    };
+    remeasure();
+    window.addEventListener("resize", remeasure);
+    const observer = new ResizeObserver(remeasure);
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => {
+      window.removeEventListener("resize", remeasure);
+      observer.disconnect();
+    };
+  }, [reducedMotion]);
+
   return (
-    <section id="hero" className="relative overflow-x-clip">
-      <div className="relative flex min-h-dvh flex-col items-center justify-center gap-10 pt-6 pb-16 max-lg:[@media(max-height:700px)]:gap-6 max-lg:[@media(max-height:700px)]:pb-10 md:max-lg:[@media(min-height:700px)]:gap-14 lg:flex-row lg:gap-0 lg:pt-0 lg:pb-0">
-        <div
-          ref={globeRef}
-          className="pointer-events-none absolute inset-y-0 right-[4%] hidden w-[55%] items-center justify-end will-change-transform lg:flex"
-        >
-          {hydrated && isDesktop && (
-            // Scales with the viewport until xl so it clears the text block
-            // on narrow-desktop widths (e.g. iPad landscape).
-            <Globe className="max-w-[min(42vw,80vh)] xl:max-w-[min(640px,80vh)]" />
-          )}
-        </div>
+    <section
+      ref={sectionRef}
+      id="hero"
+      className="relative isolate overflow-x-clip"
+    >
+      <div ref={backdropRef} className="absolute inset-0">
+        <HeroBackdrop />
+      </div>
+      <div className="relative mx-auto grid min-h-dvh w-full max-w-[1400px] content-center items-center gap-10 px-6 pb-10 pt-16 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start lg:gap-20 lg:px-12 lg:py-20">
         <div
           ref={textRef}
-          className="relative z-10 mx-auto w-full max-w-[1400px] px-6 text-center will-change-transform lg:px-12 lg:text-left"
+          // On desktop the text column top-aligns with the card, offset by the
+          // card's padding so the name's cap line sits level with the photo.
+          className="text-center will-change-transform lg:pt-6 lg:text-left"
         >
-          <p className="font-mono text-[13px] font-medium uppercase tracking-[0.06em] text-muted-foreground">
-            Software Engineer — Chapel Hill, NC
-          </p>
-          <h1 className="mt-4 font-display text-[44px] leading-[1.1] max-lg:[@media(max-height:700px)]:mt-3 max-lg:[@media(max-height:700px)]:text-[36px] md:max-lg:[@media(min-height:700px)]:text-[64px] lg:text-[64px] xl:text-[80px]">
-            Arnav Murthi
+          <h1
+            className={cn(
+              // Desktop size tracks the smaller of width and height, so the
+              // stacked name keeps filling the column beside the card.
+              "text-[56px] font-extrabold uppercase leading-[0.88] tracking-[-0.035em] sm:text-[72px] lg:text-[min(10.5vw,17vh,168px)]",
+              rise,
+              "motion-safe:delay-75"
+            )}
+          >
+            {/* Keep a real space between the lines so the heading's text
+                reads "Arnav Murthi", not "ArnavMurthi". */}
+            {profile.name.split(" ").map((line, i) => (
+              <span key={line} className="block">
+                {i > 0 && " "}
+                {line}
+              </span>
+            ))}
           </h1>
-          <p className="mt-5 font-mono text-base leading-[1.4] md:max-lg:[@media(min-height:700px)]:text-xl lg:text-lg xl:text-xl">
-            <Typewriter />
+          <p
+            className={cn(
+              "mx-auto mt-6 max-w-[36rem] text-balance font-mono text-[15px] leading-[1.75] text-muted-foreground lg:mx-0 lg:mt-7 lg:max-w-[40rem] lg:text-pretty lg:text-[19px] xl:max-w-[44rem] xl:text-[22px]",
+              rise,
+              "motion-safe:delay-150"
+            )}
+          >
+            Full-stack engineer and founder. I built{" "}
+            <span className="text-foreground">ProfitGreen</span>, an investing
+            app with <span className="text-foreground">7,000+ users</span> that
+            drew an acquisition offer.
           </p>
-          <p className="mx-auto mt-6 max-w-[480px] px-4 text-base leading-[1.6] text-muted-foreground max-lg:[@media(max-height:700px)]:mt-4 md:max-lg:[@media(min-height:700px)]:max-w-[560px] md:max-lg:[@media(min-height:700px)]:text-lg lg:mx-0 lg:px-0 lg:text-lg">
-            Shipping products from first commit to thousands of users.
-          </p>
+
+          <div
+            className={cn(
+              "mt-7 flex justify-center lg:justify-start xl:mt-9",
+              rise,
+              "motion-safe:delay-200"
+            )}
+          >
+            <a
+              href="#projects"
+              className="group relative inline-flex items-center gap-1.5 font-mono text-[13px] font-medium uppercase tracking-[0.06em] text-foreground lg:text-[14px] xl:text-[15px]"
+            >
+              View work
+              <ArrowDown className="size-3.5 transition-transform duration-300 group-hover:translate-y-0.5" />
+              <span
+                aria-hidden
+                className="absolute inset-x-0 -bottom-1 h-px origin-left scale-x-0 bg-current transition-transform duration-300 ease-out group-hover:scale-x-100"
+              />
+            </a>
+          </div>
         </div>
 
-        {/* On mobile the globe shares the first viewport with the text. */}
-        <div
-          ref={mobileGlobeRef}
-          className="flex w-full justify-center px-10 lg:hidden"
-        >
-          {hydrated && !isDesktop && (
-            // Portrait tablets (md–lg, tall screens) get a much larger globe
-            // to fill the vertical room; short landscapes keep the small one.
-            <Globe className="max-w-[280px] [@media(max-height:700px)]:max-w-[210px] md:[@media(min-height:700px)]:max-w-[min(560px,48vh)]" />
-          )}
-        </div>
-
-        <div
-          aria-hidden
-          className="absolute inset-x-0 bottom-8 hidden justify-center lg:flex"
-        >
-          <ChevronDown className="size-5 animate-cue-bounce text-faint motion-reduce:animate-none" />
+        <div ref={cardRef} className="will-change-transform">
+          <div
+            className={cn(
+              "flex justify-center lg:justify-end",
+              rise,
+              // On phones the photo is the largest paint, so it skips the
+              // stagger delay.
+              "motion-safe:duration-1000 lg:motion-safe:delay-300"
+            )}
+          >
+            <HeroCard />
+          </div>
         </div>
       </div>
-
-      <ScrollToProjectsButton />
     </section>
   );
 }

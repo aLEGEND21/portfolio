@@ -9,6 +9,8 @@ export const profile = {
   // Card "serial" in the top-right corner — the issue date in mmddyy,
   // deliberately unpunctuated so it reads as an ID number at first glance.
   issued: "071826",
+  // Linked from the portfolio footer.
+  email: "armurthi@unc.edu",
   bio: "Full-stack developer, founder, and freelancer. Creator of ProfitGreen, an investing app with 7,000+ users.",
   links: {
     github: "https://github.com/aLEGEND21",

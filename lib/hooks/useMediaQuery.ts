@@ -24,14 +24,3 @@ export function useMediaQuery(query: string) {
 export function usePrefersReducedMotion() {
   return useMediaQuery("(prefers-reduced-motion: reduce)");
 }
-
-const emptySubscribe = () => () => {};
-
-/** False during SSR/hydration, true on the client afterwards. */
-export function useHydrated() {
-  return useSyncExternalStore(
-    emptySubscribe,
-    () => true,
-    () => false
-  );
-}

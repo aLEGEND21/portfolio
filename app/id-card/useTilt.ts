@@ -8,7 +8,7 @@ import {
   usePrefersReducedMotion,
 } from "@/lib/hooks/useMediaQuery";
 
-const MAX_TILT = 13; // degrees
+const DEFAULT_MAX_TILT = 13; // degrees
 const SPRING = { stiffness: 150, damping: 15 };
 // Degrees of physical device tilt (from the neutral holding angle) that map
 // to the full card tilt range.
@@ -46,22 +46,27 @@ const emptySubscribe = () => () => {};
 // Cursor position (desktop) or device orientation (mobile) → spring-smoothed
 // rotation + glare-center motion values. Glare slides opposite the tilt,
 // holographic-card style.
-export function useTilt() {
+// `gyro: false` keeps a card mouse-only — for embeds in a scrolling page,
+// where tilting the phone to read shouldn't also swing the card.
+export function useTilt({
+  maxTilt = DEFAULT_MAX_TILT,
+  gyro = true,
+}: { maxTilt?: number; gyro?: boolean } = {}) {
   const reducedMotion = usePrefersReducedMotion();
   const canHover = useMediaQuery("(hover: hover)");
 
   const rotateX = useSpring(0, SPRING);
   const rotateY = useSpring(0, SPRING);
-  const glareX = useTransform(rotateY, (v) => 50 - (v / MAX_TILT) * 40);
-  const glareY = useTransform(rotateX, (v) => 50 + (v / MAX_TILT) * 40);
+  const glareX = useTransform(rotateY, (v) => 50 - (v / maxTilt) * 40);
+  const glareY = useTransform(rotateX, (v) => 50 + (v / maxTilt) * 40);
 
   // Offsets are -0.5..0.5 from card center on each axis.
   const setOffsets = useCallback(
     (ox: number, oy: number) => {
-      rotateX.set(oy * -MAX_TILT);
-      rotateY.set(ox * MAX_TILT);
+      rotateX.set(oy * -maxTilt);
+      rotateY.set(ox * maxTilt);
     },
-    [rotateX, rotateY]
+    [rotateX, rotateY, maxTilt]
   );
 
   const reset = useCallback(() => {
@@ -90,11 +95,13 @@ export function useTilt() {
   );
 
   const gyroEnabled =
+    gyro &&
     !canHover &&
     !reducedMotion &&
     (support === "ready" ||
       (support === "needs-permission" && permission === "granted"));
   const needsGyroPermission =
+    gyro &&
     !canHover &&
     !reducedMotion &&
     support === "needs-permission" &&

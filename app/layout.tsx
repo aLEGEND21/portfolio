@@ -1,15 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { Elsie, Inter, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-
-import { MouseGlow } from "@/components/MouseGlow";
-
-const elsie = Elsie({
-  variable: "--font-elsie",
-  subsets: ["latin"],
-  weight: ["400", "900"],
-  display: "swap",
-});
 
 const inter = Inter({
   variable: "--font-inter",
@@ -63,10 +54,9 @@ export default function RootLayout({
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${elsie.variable} ${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <MouseGlow />
         {children}
       </body>
     </html>

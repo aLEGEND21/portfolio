@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 type ScrollCallback = (y: number) => void;
 
@@ -45,19 +45,4 @@ export function useScrollY(callback: ScrollCallback) {
       }
     };
   }, []);
-}
-
-/** Scroll direction as state; only re-renders when the direction flips. */
-export function useScrollDirection(threshold = 8) {
-  const [direction, setDirection] = useState<"up" | "down">("up");
-  const lastY = useRef(0);
-
-  useScrollY((y) => {
-    const diff = y - lastY.current;
-    if (Math.abs(diff) < threshold) return;
-    lastY.current = y;
-    setDirection(diff > 0 ? "down" : "up");
-  });
-
-  return direction;
 }
