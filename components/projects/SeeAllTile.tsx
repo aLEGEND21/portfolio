@@ -21,7 +21,7 @@ export function SeeAllTile() {
         {projects.length} projects
       </p>
       <div className="relative flex items-end justify-between gap-4">
-        <h2 className="font-display text-2xl leading-[1.2] lg:text-[28px]">
+        <h2 className="text-2xl font-bold leading-[1.15] tracking-[-0.02em] lg:text-[28px]">
           See all projects
         </h2>
         <ArrowRight className="mb-1 size-6 shrink-0 text-muted-foreground transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:text-foreground" />

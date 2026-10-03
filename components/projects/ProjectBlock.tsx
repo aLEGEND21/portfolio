@@ -18,6 +18,7 @@ export type ProjectBlockProps = {
   url: string;
   image: StaticImageData;
   videoSrc?: string;
+  mediaCrop?: { scale: number; origin: string };
   oneLiner: string;
   /**
    * flagship — full-width row, media beside a text panel.
@@ -38,6 +39,7 @@ export function ProjectBlock({
   url,
   image,
   videoSrc,
+  mediaCrop,
   oneLiner,
   variant,
   index,
@@ -86,7 +88,7 @@ export function ProjectBlock({
       </p>
       <h3
         className={cn(
-          "mt-4 font-display text-[26px] leading-[1.2] lg:text-[32px]",
+          "mt-4 text-[24px] font-bold leading-[1.15] tracking-[-0.02em] lg:text-[30px]",
           // The flagship side panel is narrow, so its measure is capped tight.
           // Stacked cells are half to two-thirds of the row; let the line run.
           variant === "flagship" ? "max-w-[420px]" : "max-w-[720px]"
@@ -123,6 +125,7 @@ export function ProjectBlock({
               image={image}
               alt={`Screenshot of ${name}`}
               videoSrc={videoSrc}
+              crop={mediaCrop}
               isActive={isActive}
               sizes="(max-width: 1024px) 100vw, (max-width: 1280px) 75vw, 66vw"
             />
@@ -147,6 +150,7 @@ export function ProjectBlock({
               image={image}
               alt={`Screenshot of ${name}`}
               videoSrc={videoSrc}
+              crop={mediaCrop}
               isActive={isActive}
               sizes="(max-width: 1024px) 100vw, 50vw"
             />

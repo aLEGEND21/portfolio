@@ -53,6 +53,12 @@ export function ProjectCard({
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             onLoad={() => setLoaded(true)}
+            style={
+              project.mediaCrop && {
+                transform: `scale(${project.mediaCrop.scale})`,
+                transformOrigin: project.mediaCrop.origin,
+              }
+            }
             className={cn(
               "object-cover object-top transition-[filter,opacity,scale] duration-[800ms] ease-out group-hover:scale-[1.02]",
               loaded ? "opacity-100" : "opacity-0",
@@ -65,7 +71,7 @@ export function ProjectCard({
         <div className="p-6">
           <div className="transition-transform duration-300 ease-out group-hover:-translate-y-[3px]">
             <div className="flex items-baseline justify-between gap-4">
-              <h2 className="font-display text-xl">{project.name}</h2>
+              <h2 className="text-xl font-bold tracking-[-0.02em]">{project.name}</h2>
               <span
                 aria-hidden
                 className={cn(

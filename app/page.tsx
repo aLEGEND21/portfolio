@@ -6,9 +6,9 @@ import { FeaturedProjects } from "@/components/projects/FeaturedProjects";
 export default function Home() {
   return (
     <>
-      <Navbar />
-      <Hero />
+      <Navbar hideNameInHero />
       <main>
+        <Hero />
         <FeaturedProjects />
       </main>
       <Footer />

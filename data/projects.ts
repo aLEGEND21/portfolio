@@ -24,6 +24,11 @@ export type Project = {
   tags: string[];
   /** Demo clip for the grayscale→color hover mechanic; image is used as poster/fallback. */
   videoSrc?: string;
+  /**
+   * Zoom that crops recording chrome (e.g. a desktop-wallpaper border) off
+   * the media's edges; `origin` biases the crop toward the thicker border.
+   */
+  mediaCrop?: { scale: number; origin: string };
   featured?: {
     order: number;
     tier: "large" | "medium";
@@ -73,6 +78,8 @@ export const projects: Project[] = [
     image: syntronImage,
     url: "https://github.com/aLEGEND21/Syntron",
     videoSrc: "/videos/syntron.mp4",
+    // The recording shows ~66px of wallpaper on each side and ~36px below.
+    mediaCrop: { scale: 1.09, origin: "50% 20%" },
     featured: {
       order: 3,
       tier: "medium",

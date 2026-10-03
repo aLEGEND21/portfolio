@@ -8,7 +8,21 @@ import { cn } from "@/lib/utils";
 
 const NAV_HEIGHT = 64;
 
-export function Navbar() {
+const linkClass =
+  "group relative font-mono text-[13px] font-medium uppercase tracking-[0.06em] text-muted-foreground transition-colors hover:text-foreground";
+const underline =
+  "absolute inset-x-0 -bottom-1 h-px origin-left scale-x-0 bg-current transition-transform duration-300 ease-out group-hover:scale-x-100";
+
+/**
+ * `hideNameInHero` — on the home page the hero already sets the name in
+ * large type, so the nav shows just the "AM" monogram until the hero scrolls
+ * away, then the full name.
+ */
+export function Navbar({
+  hideNameInHero = false,
+}: {
+  hideNameInHero?: boolean;
+}) {
   const [hidden, setHidden] = useState(false);
   const [pastHero, setPastHero] = useState(false);
   const lastY = useRef(0);
@@ -52,24 +66,28 @@ export function Navbar() {
         <div className="mx-auto flex h-16 w-full max-w-[1400px] items-center justify-between px-6 lg:px-12">
           <Link
             href="/"
+            // The monogram's accessible name must start with the visible
+            // "AM" (WCAG 2.5.3); the full name needs no override.
+            aria-label={
+              hideNameInHero && !pastHero
+                ? "AM, Arnav Murthi — home"
+                : undefined
+            }
             className="group relative font-mono text-[13px] font-medium uppercase tracking-[0.06em]"
           >
-            Arnav Murthi
-            <span
-              aria-hidden
-              className="absolute inset-x-0 -bottom-1 h-px origin-left scale-x-0 bg-current transition-transform duration-300 ease-out group-hover:scale-x-100"
-            />
+            {hideNameInHero && !pastHero ? "AM" : "Arnav Murthi"}
+            <span aria-hidden className={underline} />
           </Link>
-          <Link
-            href="/projects"
-            className="group relative font-mono text-[13px] font-medium uppercase tracking-[0.06em] text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Projects
-            <span
-              aria-hidden
-              className="absolute inset-x-0 -bottom-1 h-px origin-left scale-x-0 bg-current transition-transform duration-300 ease-out group-hover:scale-x-100"
-            />
-          </Link>
+          <div className="flex items-center gap-8">
+            <Link href="/projects" className={linkClass}>
+              Projects
+              <span aria-hidden className={underline} />
+            </Link>
+            <a href="https://id.arnavm.com" className={linkClass}>
+              Contact
+              <span aria-hidden className={underline} />
+            </a>
+          </div>
         </div>
       </nav>
     </header>

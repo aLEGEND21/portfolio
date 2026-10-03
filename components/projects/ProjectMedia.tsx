@@ -14,11 +14,19 @@ type Props = {
   videoSrc?: string;
   isActive: boolean;
   sizes: string;
+  crop?: { scale: number; origin: string };
 };
 
 // Bare edge-to-edge media — no frame, no rounding; separation between
 // projects comes from the section grid's borders.
-export function ProjectMedia({ image, alt, videoSrc, isActive, sizes }: Props) {
+export function ProjectMedia({
+  image,
+  alt,
+  videoSrc,
+  isActive,
+  sizes,
+  crop,
+}: Props) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const reducedMotion = usePrefersReducedMotion();
   const [loaded, setLoaded] = useState(false);
@@ -49,6 +57,9 @@ export function ProjectMedia({ image, alt, videoSrc, isActive, sizes }: Props) {
     "absolute inset-0 size-full object-cover object-center transition-opacity duration-500",
     loaded ? "opacity-100" : "opacity-0"
   );
+  const cropStyle = crop
+    ? { transform: `scale(${crop.scale})`, transformOrigin: crop.origin }
+    : undefined;
 
   return (
     <div
@@ -74,6 +85,7 @@ export function ProjectMedia({ image, alt, videoSrc, isActive, sizes }: Props) {
           playsInline
           preload="metadata"
           className={mediaClassName}
+          style={cropStyle}
         />
       ) : (
         <Image
@@ -83,6 +95,7 @@ export function ProjectMedia({ image, alt, videoSrc, isActive, sizes }: Props) {
           sizes={sizes}
           onLoad={() => setLoaded(true)}
           className={mediaClassName}
+          style={cropStyle}
         />
       )}
     </div>

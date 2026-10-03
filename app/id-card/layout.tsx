@@ -31,8 +31,7 @@ export const metadata: Metadata = {
 };
 
 // Full-viewport dark stage with the card centered; deliberately no portfolio
-// nav/footer. The stage's opaque --ink background also covers the root
-// layout's MouseGlow (which sits at -z-10).
+// nav/footer.
 export default function IDCardLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {

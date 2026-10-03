@@ -18,7 +18,7 @@ export default function ProjectsPage() {
         <p className="font-mono text-[13px] font-medium uppercase tracking-[0.06em] text-muted-foreground">
           {projects.length} projects
         </p>
-        <h1 className="mt-4 font-display text-4xl leading-[1.15] lg:text-5xl">
+        <h1 className="mt-4 text-4xl font-extrabold uppercase leading-[0.95] tracking-[-0.03em] lg:text-6xl">
           All projects
         </h1>
         <ProjectsGrid />

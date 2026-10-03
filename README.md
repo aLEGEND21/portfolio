@@ -1,9 +1,8 @@
 # arnavm.com
 
 Personal portfolio site for Arnav Murthi — a dark, editorial one-pager with a
-WebGL globe hero, a typewriter role cycler, and a featured-projects grid with
-hover video demos. Built with Next.js (App Router), React, Tailwind CSS,
-shadcn/ui, and [cobe](https://github.com/shuding/cobe) for the globe.
+contact-card hero and a featured-projects grid with hover video demos. Built
+with Next.js (App Router), React, Tailwind CSS, and shadcn/ui.
 
 ## Setup
 
