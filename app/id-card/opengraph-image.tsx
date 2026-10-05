@@ -6,6 +6,10 @@ import { formatIssued, profile } from "./profile";
 export const alt = `${profile.name} — Contact Card`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+// Re-render hourly so the card's issue date tracks the current day. Pinned to
+// Eastern since the server clock is UTC and would roll over to "tomorrow" early.
+export const revalidate = 3600;
+const issuedTimeZone = "America/New_York";
 
 // Token values are hardcoded here because Satori can't read the route's CSS
 // variables — keep in sync with app/id-card/idcard.css.
@@ -58,7 +62,7 @@ export default function Image() {
             }}
           >
             <span>CONTACT CARD</span>
-            <span>Nº {formatIssued(new Date())}</span>
+            <span>Nº {formatIssued(new Date(), issuedTimeZone)}</span>
           </div>
           <div
             style={{

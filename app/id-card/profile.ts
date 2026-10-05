@@ -21,11 +21,14 @@ export const profile = {
 
 // Card "serial" in the top-right corner — the issue date (always "today") in
 // mmddyy, deliberately unpunctuated so it reads as an ID number at first glance.
-export function formatIssued(date: Date) {
-  const pad = (n: number) => String(n).padStart(2, "0");
-  return (
-    pad(date.getMonth() + 1) +
-    pad(date.getDate()) +
-    pad(date.getFullYear() % 100)
-  );
+// `timeZone` defaults to the runtime's local zone (the viewer's, on the client).
+export function formatIssued(date: Date, timeZone?: string) {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    month: "2-digit",
+    day: "2-digit",
+    year: "2-digit",
+    timeZone,
+  }).formatToParts(date);
+  const get = (type: string) => parts.find((p) => p.type === type)!.value;
+  return get("month") + get("day") + get("year");
 }
