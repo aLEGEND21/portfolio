@@ -1,6 +1,7 @@
 import Image from "next/image";
 
-import { profile } from "../profile";
+import { formatIssued, profile } from "../profile";
+import { IssuedDate } from "./IssuedDate";
 import { SocialLinks } from "./SocialLinks";
 
 // Portrait ID-card shell (driver's-license grammar: eyebrow zone, photo
@@ -33,7 +34,9 @@ export function IDCard() {
 
         <header className="flex items-baseline justify-between font-mono text-[3.4cqw] font-medium uppercase tracking-[0.18em] text-[var(--ink)]/85">
           <span>Contact Card</span>
-          <span>N&ordm; {profile.issued}</span>
+          <span>
+            N&ordm; <IssuedDate fallback={formatIssued(new Date())} />
+          </span>
         </header>
 
         <div className="my-[4.5cqw] h-px bg-[var(--ink-15)]" />

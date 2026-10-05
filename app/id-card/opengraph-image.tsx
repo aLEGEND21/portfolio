@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 import { linkOrder } from "./components/SocialLinks";
-import { profile } from "./profile";
+import { formatIssued, profile } from "./profile";
 
 export const alt = `${profile.name} — Contact Card`;
 export const size = { width: 1200, height: 630 };
@@ -58,7 +58,7 @@ export default function Image() {
             }}
           >
             <span>CONTACT CARD</span>
-            <span>Nº {profile.issued}</span>
+            <span>Nº {formatIssued(new Date())}</span>
           </div>
           <div
             style={{

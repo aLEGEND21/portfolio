@@ -6,9 +6,6 @@ export const profile = {
   university: "UNC Chapel Hill · Computer Science",
   location: "Chapel Hill, NC",
   classYear: "2028",
-  // Card "serial" in the top-right corner — the issue date in mmddyy,
-  // deliberately unpunctuated so it reads as an ID number at first glance.
-  issued: "071826",
   // Linked from the portfolio footer.
   email: "armurthi@unc.edu",
   bio: "Full-stack developer, founder, and freelancer. Creator of ProfitGreen, an investing app with 7,000+ users.",
@@ -21,3 +18,14 @@ export const profile = {
   // Set to null to fall back to the "AM" monogram treatment.
   photo: "/headshot.jpg" as string | null,
 };
+
+// Card "serial" in the top-right corner — the issue date (always "today") in
+// mmddyy, deliberately unpunctuated so it reads as an ID number at first glance.
+export function formatIssued(date: Date) {
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return (
+    pad(date.getMonth() + 1) +
+    pad(date.getDate()) +
+    pad(date.getFullYear() % 100)
+  );
+}
